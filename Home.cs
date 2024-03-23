@@ -16,12 +16,14 @@ namespace LeaveManagementApp
 {
     public partial class Home : Form
     {
-        SqlConnection con = null;
+        public static SqlConnection con = null;
         DataTable dtleavetype = new DataTable();
         DataTable dtshiftmode = new DataTable();
         DataTable dtleavegen= new DataTable();  
         public static string startDate, endDate;
         public static int leaveid;
+        public static string strcon = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        
         public Home()
         {
             InitializeComponent();
@@ -30,7 +32,6 @@ namespace LeaveManagementApp
         {
             try
             {
-                string strcon = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
                 con = new SqlConnection(strcon);
                 con.Open();
                 BindLeaveType();
@@ -174,7 +175,7 @@ namespace LeaveManagementApp
             }
 
             //MessageBox.Show(getLeaveType + " " + getShiftType + " "+startDate +" "+ endDate +" "+ txtnoofdays.Text + " "+ textBox1.Text);
-            InsertIntoDBLeaveRecord(getLeaveType, getShiftType, startDate, endDate, txtnoofdays.Text, textBox1.Text);
+            InsertIntoDBLeaveRecord(getLeaveType, getShiftType, txtnoofdays.Text, textBox1.Text, startDate, endDate);
 
         }
         public void InsertIntoDBLeaveRecord(string lvtype,string sftype,string totdays,string lvcom, string stdt, string endt )
@@ -247,7 +248,9 @@ namespace LeaveManagementApp
 
         private void btnlvreport_Click(object sender, EventArgs e)
         {
-
+            ShowLeaveReport openReport = new ShowLeaveReport();
+            openReport.ShowDialog();
+            this.Close();
         }
 
         private void cmBxshiftmode_Validating(object sender, CancelEventArgs e)
