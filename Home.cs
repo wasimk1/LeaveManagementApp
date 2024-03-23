@@ -30,10 +30,8 @@ namespace LeaveManagementApp
             try
             {
                 string strcon = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-                
                 con = new SqlConnection(strcon);
                 con.Open();
-
                 BindLeaveType();
 
             }
@@ -67,12 +65,8 @@ namespace LeaveManagementApp
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
-            
-            
-            
             
         }
 
