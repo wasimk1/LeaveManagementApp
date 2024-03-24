@@ -95,19 +95,19 @@ namespace LeaveManagementApp
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (checkBox1.Checked == true)
-                {
-                    cmBxshiftmode.Enabled = true;
+            //try
+            //{
+            //    if (checkBox1.Checked == true)
+            //    {
+            //        cmBxshiftmode.Enabled = true;
                     
-                }
-            }
-            catch (Exception ex)
-            {
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-                MessageBox.Show(ex.Message);
-            }
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void dateTimePicker1_Validating(object sender, CancelEventArgs e)
@@ -124,7 +124,7 @@ namespace LeaveManagementApp
             {
                 label6.Text = "Total Day";
                 checkBox1.Checked = true;
-                checkBox1.Enabled = true;
+                checkBox1.Enabled = false;
                 cmBxshiftmode.Enabled = true;
             }
             else if(Convert.ToInt32(txtnoofdays.Text) > 1)
@@ -227,7 +227,7 @@ namespace LeaveManagementApp
         }
         private void Home_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(MessageBox.Show("Do you want to close the Application?", "ExitApplicationApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Do you want to close the Application?", "ExitApplicationApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Application.Exit();
             }
@@ -249,8 +249,115 @@ namespace LeaveManagementApp
         private void btnlvreport_Click(object sender, EventArgs e)
         {
             ShowLeaveReport openReport = new ShowLeaveReport();
+            this.Hide();
             openReport.ShowDialog();
             this.Close();
+            
+        }
+
+        private void comboBox1_Validating(object sender, CancelEventArgs e)
+        {
+            string appstart= comboBox1.SelectedText.ToString().Trim();
+            if(appstart=="Apply Leave")
+            {
+                label1.Visible = true;
+                combxleavetype.Visible = true;
+                label2.Visible = true;
+                dateTimePicker1.Visible = true;
+                label3.Visible = true;
+                dateTimePicker2.Visible     = true;
+                label4.Visible = true;
+                checkBox1.Visible = true;
+                cmBxshiftmode.Visible = true;
+                label6.Visible = true;
+                txtnoofdays.Visible = true;
+                label5.Visible = true;
+                textBox1.Visible = true;
+                btnapplyleave.Visible = true;
+                label8.Visible = true;
+                txtlvid.Visible = true;
+                button1.Visible = true;
+            }
+            else if (appstart== "Delete Applied Leave")
+            {
+                label1.Visible= true;
+                label1.Text = "Enter the Leave ID";
+                txtgetlvidfordel.Visible = true;
+                btndel.Visible  = true;
+
+
+            }
+            
+            else
+            {
+                label1.Visible = false;
+                combxleavetype.Visible = false;
+                label2.Visible = false;
+                dateTimePicker1.Visible = false;
+                label3.Visible = false;
+                dateTimePicker2.Visible = false;
+                label4.Visible = false;
+                checkBox1.Visible = false;
+                cmBxshiftmode.Visible = false;
+                label6.Visible = false;
+                txtnoofdays.Visible = false;
+                label5.Visible = false;
+                textBox1.Visible = false;
+                btnapplyleave.Visible = false;
+                label8.Visible = false;
+                txtlvid.Visible = false;
+            }
+        }
+        public void DeleteAppliedLeave (string getlvid){
+            try
+            {
+                string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + getlvid + "'";
+                SqlCommand cmd = new SqlCommand(cmdstr, con);
+                SqlDataReader sr = cmd.ExecuteReader();
+                MessageBox.Show("Leave successfully deleted");
+                sr.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            button1.Visible=false;
+            comboBox1.Text = "";
+            label1.Visible = false;
+            combxleavetype.Visible = false;
+            label2.Visible = false;
+            dateTimePicker1.Visible = false;
+            label3.Visible = false;
+            dateTimePicker2.Visible = false;
+            label4.Visible = false;
+            checkBox1.Visible = false;
+            cmBxshiftmode.Visible = false;
+            label6.Visible = false;
+            txtnoofdays.Visible = false;
+            label5.Visible = false;
+            textBox1.Visible = false;
+            btnapplyleave.Visible = false;
+            label8.Visible = false;
+            txtlvid.Visible = false;
+        }
+
+        private void btndel_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtgetlvidfordel.Text.ToUpper().Trim()))
+            {
+                MessageBox.Show("Please enter the valid Leave ID");
+                return;
+            }
+            else
+            {
+                DeleteAppliedLeave(txtgetlvidfordel.Text.ToUpper().Trim());
+            }
+            
         }
 
         private void cmBxshiftmode_Validating(object sender, CancelEventArgs e)
