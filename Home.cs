@@ -277,6 +277,7 @@ namespace LeaveManagementApp
                 label8.Visible = true;
                 txtlvid.Visible = true;
                 button1.Visible = true;
+                label1.Text = "Leave Type";
             }
             else if (appstart== "Delete Applied Leave")
             {
@@ -284,7 +285,7 @@ namespace LeaveManagementApp
                 label1.Text = "Enter the Leave ID";
                 txtgetlvidfordel.Visible = true;
                 btndel.Visible  = true;
-
+                button1.Visible= true;
 
             }
             
@@ -311,10 +312,31 @@ namespace LeaveManagementApp
         public void DeleteAppliedLeave (string getlvid){
             try
             {
-                string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + getlvid + "'";
+                string passid = "";
+                DataTable dtgetleave = new DataTable();
+                dtgetleave.Clear();
+                string scmd = "select leaveid from leave_records where leaveid='"+ getlvid + "'";
+                SqlCommand cmd1=new SqlCommand(scmd,con);
+                SqlDataAdapter sd= new SqlDataAdapter(cmd1);
+                sd.Fill(dtgetleave);
+                sd.Dispose();
+                if (dtgetleave.Rows.Count > 0){
+                    passid = dtgetleave.Rows[0]["leaveid"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Please enter the valid Leave ID");
+                    txtgetlvidfordel.Text = "";
+                    txtgetlvidfordel.Focus();
+                    return;
+                }
+                
+                string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + passid + "'";
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 SqlDataReader sr = cmd.ExecuteReader();
                 MessageBox.Show("Leave successfully deleted");
+                txtgetlvidfordel.Text = "";
+                txtgetlvidfordel.Focus();
                 sr.Close();
             }
             catch (SqlException ex)
@@ -326,37 +348,57 @@ namespace LeaveManagementApp
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            button1.Visible=false;
-            comboBox1.Text = "";
-            label1.Visible = false;
-            combxleavetype.Visible = false;
-            label2.Visible = false;
-            dateTimePicker1.Visible = false;
-            label3.Visible = false;
-            dateTimePicker2.Visible = false;
-            label4.Visible = false;
-            checkBox1.Visible = false;
-            cmBxshiftmode.Visible = false;
-            label6.Visible = false;
-            txtnoofdays.Visible = false;
-            label5.Visible = false;
-            textBox1.Visible = false;
-            btnapplyleave.Visible = false;
-            label8.Visible = false;
-            txtlvid.Visible = false;
+            try
+            {
+                button1.Visible = false;
+                comboBox1.Text = "";
+                label1.Visible = false;
+                combxleavetype.Visible = false;
+                label2.Visible = false;
+                dateTimePicker1.Visible = false;
+                label3.Visible = false;
+                dateTimePicker2.Visible = false;
+                label4.Visible = false;
+                checkBox1.Visible = false;
+                cmBxshiftmode.Visible = false;
+                label6.Visible = false;
+                txtnoofdays.Visible = false;
+                label5.Visible = false;
+                textBox1.Visible = false;
+                btnapplyleave.Visible = false;
+                label8.Visible = false;
+                txtlvid.Visible = false;
+                txtgetlvidfordel.Visible = false;
+                btndel.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btndel_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtgetlvidfordel.Text.ToUpper().Trim()))
+            try
             {
-                MessageBox.Show("Please enter the valid Leave ID");
-                return;
+                
+                if (string.IsNullOrEmpty(txtgetlvidfordel.Text.ToUpper().Trim()))
+                {
+                    MessageBox.Show("Please enter the valid Leave ID");
+                    return;
+                }
+                else
+                {
+                    DeleteAppliedLeave(txtgetlvidfordel.Text.ToUpper().Trim());
+                }
             }
-            else
+            catch (Exception)
             {
-                DeleteAppliedLeave(txtgetlvidfordel.Text.ToUpper().Trim());
+
+                throw;
             }
+            
             
         }
 
