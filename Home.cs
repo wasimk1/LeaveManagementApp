@@ -286,6 +286,7 @@ namespace LeaveManagementApp
                 txtlvid.Visible = true;
                 button1.Visible = true;
                 label1.Text = "Leave Type";
+                btndel.Visible = false;
             }
             else if (appstart== "Delete Applied Leave")
             {
@@ -294,6 +295,24 @@ namespace LeaveManagementApp
                 txtgetlvidfordel.Visible = true;
                 btndel.Visible  = true;
                 button1.Visible= true;
+
+                //label1.Visible = false;
+                combxleavetype.Visible = false;
+                label2.Visible = false;
+                dateTimePicker1.Visible = false;
+                label3.Visible = false;
+                dateTimePicker2.Visible = false;
+                label4.Visible = false;
+                checkBox1.Visible = false;
+                cmBxshiftmode.Visible = false;
+                label6.Visible = false;
+                txtnoofdays.Visible = false;
+                label5.Visible = false;
+                textBox1.Visible = false;
+                btnapplyleave.Visible = false;
+                label8.Visible = false;
+                txtlvid.Visible = false;
+
 
             }
             
