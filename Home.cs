@@ -22,7 +22,7 @@ namespace LeaveManagementApp
         DataTable dtleavegen= new DataTable();  
         public static string startDate, endDate;
         public static int leaveid;
-        public static string strcon = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        public static string strcon = ConfigurationManager.ConnectionStrings["constr-ProBook"].ConnectionString;
         
         public Home()
         {
@@ -160,7 +160,15 @@ namespace LeaveManagementApp
             {
                 if (getShiftType == "4.5")
                 {
-                    getShiftType = "HALF DAY";
+                    if(cmBxshiftmode.SelectedText=="FIRST HALF")
+                    {
+                        getShiftType = "FIRST HALF";
+                    }
+                    else
+                    {
+                        getShiftType = "SECOND HALF";
+                    }
+                    
                 }
                 else
                 {
