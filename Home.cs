@@ -22,7 +22,7 @@ namespace LeaveManagementApp
         DataTable dtleavegen= new DataTable();  
         public static string startDate, endDate;
         public static int leaveid;
-        public static string strcon = ConfigurationManager.ConnectionStrings["constr-ProBook"].ConnectionString;
+        public static string strcon = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         
         public Home()
         {
