@@ -45,7 +45,7 @@ namespace LeaveManagementApp
                 this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Server is not reachable at the moment, All Servers are buzy");
                 return;
