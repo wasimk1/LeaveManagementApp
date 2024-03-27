@@ -161,37 +161,46 @@ namespace LeaveManagementApp
 
         private void btnapplyleave_Click(object sender, EventArgs e)
         {
-            string getLeaveType = combxleavetype.SelectedValue.ToString();
-            string getShiftType=cmBxshiftmode.SelectedValue.ToString();
-            if (checkBox1.Checked == true)
+            try
             {
-                if (getShiftType == "4.5")
+                string getLeaveType = combxleavetype.SelectedValue.ToString();
+                string getShiftType = cmBxshiftmode.SelectedValue.ToString();
+                if (checkBox1.Checked == true)
                 {
-                    if(cmBxshiftmode.SelectedText=="FIRST HALF")
+                    if (getShiftType == "4.5")
                     {
-                        getShiftType = "FIRST HALF";
+                        if (cmBxshiftmode.SelectedText == "FIRST HALF")
+                        {
+                            getShiftType = "FIRST HALF";
+                        }
+                        else
+                        {
+                            getShiftType = "SECOND HALF";
+                        }
+
                     }
                     else
                     {
-                        getShiftType = "SECOND HALF";
+                        getShiftType = "FULL DAY";
                     }
-                    
+                    //getShiftType = "Total working hours " + txtnoofdays.Text;
+
                 }
                 else
                 {
-                    getShiftType = "FULL DAY";
+                    //getShiftType = "Full " + txtnoofdays.Text + " Day taken holiday";
+                    getShiftType = "FULL DAY"; //+ txtnoofdays.Text + " Day taken holiday";
                 }
-                //getShiftType = "Total working hours " + txtnoofdays.Text;
-               
+
+                //MessageBox.Show(getLeaveType + " " + getShiftType + " "+startDate +" "+ endDate +" "+ txtnoofdays.Text + " "+ textBox1.Text);
+                InsertIntoDBLeaveRecord(getLeaveType, getShiftType, txtnoofdays.Text, textBox1.Text, startDate, endDate);
+
             }
-            else
+            catch (Exception ex)
             {
-                getShiftType = "Full " + txtnoofdays.Text + " Day taken holiday";
+                MessageBox.Show(ex.Message);
             }
-
-            //MessageBox.Show(getLeaveType + " " + getShiftType + " "+startDate +" "+ endDate +" "+ txtnoofdays.Text + " "+ textBox1.Text);
-            InsertIntoDBLeaveRecord(getLeaveType, getShiftType, txtnoofdays.Text, textBox1.Text, startDate, endDate);
-
+            
         }
         public void InsertIntoDBLeaveRecord(string lvtype,string sftype,string totdays,string lvcom, string stdt, string endt )
         {
