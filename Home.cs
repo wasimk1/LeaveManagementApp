@@ -22,7 +22,8 @@ namespace LeaveManagementApp
         DataTable dtleavegen= new DataTable();  
         public static string startDate, endDate;
         public static int leaveid;
-        public static string strcon = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        
+        public static string strcon = ConfigurationManager.ConnectionStrings["constr-PAVILION-NB"].ConnectionString;
         
         public Home()
         {
@@ -32,6 +33,11 @@ namespace LeaveManagementApp
         {
             try
             {
+                if (Environment.MachineName == "PROBOOK") //For office DB connection string
+                {
+                    strcon = ConfigurationManager.ConnectionStrings["constr-PROBOOK"].ConnectionString;
+                }
+                
                 con = new SqlConnection(strcon);
                 con.Open();
                 BindLeaveType();
@@ -41,7 +47,8 @@ namespace LeaveManagementApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Server is not reachable at the moment, All Servers are buzy");
+                return;
             }
             
         }
