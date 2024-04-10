@@ -251,10 +251,14 @@ namespace LeaveManagementApp
         }
         private void Home_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Do you want to close the Application?", "ExitApplicationApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Do you want to close the Application?", "ExitApplicationApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
-                Application.Exit();
+                e.Cancel = true;
             }
+            //else
+            //{
+            //    e.Cancel = false;
+            //}
         }
 
         private void textBox1_Validating(object sender, CancelEventArgs e)
@@ -273,9 +277,9 @@ namespace LeaveManagementApp
         private void btnlvreport_Click(object sender, EventArgs e)
         {
             ShowLeaveReport openReport = new ShowLeaveReport();
-            this.Hide();
+            //this.Hide();
             openReport.ShowDialog();
-            this.Close();
+            //this.Close();
             
         }
 

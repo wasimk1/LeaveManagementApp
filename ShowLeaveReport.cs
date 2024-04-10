@@ -42,10 +42,18 @@ namespace LeaveManagementApp
         private void btnback_Click(object sender, EventArgs e)
         {
             Home openhome = new Home();
-            this.Hide();
+            //this.Hide();
+            //closeapp();
             openhome.ShowDialog();
-            this.Close();
+            //this.close();
+
+
         }
+        public void closeapp()
+        {
+            Application.Exit();
+        }
+
         private void textBox1_Validating(object sender, CancelEventArgs e)
         {
             getleaveid = textBox1.Text.Trim().ToUpper();
@@ -141,27 +149,27 @@ namespace LeaveManagementApp
                         File.Delete(filepath);
                     }
                 }
-            dtFillLeaveRpt.Clear();
-            string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / WORKING HOURS],STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS order by id desc";
-            SqlCommand cmd = new SqlCommand(cmdstr, Home.con);
-            SqlDataAdapter sd = new SqlDataAdapter(cmd);
-            sd.Fill(dtFillLeaveRpt);
-            sd.Dispose();
-            if (dtFillLeaveRpt.Rows.Count > 0)
-            {
+                dtFillLeaveRpt.Clear();
+                string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / WORKING HOURS],STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS order by id desc";
+                SqlCommand cmd = new SqlCommand(cmdstr, Home.con);
+                SqlDataAdapter sd = new SqlDataAdapter(cmd);
+                sd.Fill(dtFillLeaveRpt);
+                sd.Dispose();
+                if (dtFillLeaveRpt.Rows.Count > 0)
+                {
                     CreateCSVFile(ref dtFillLeaveRpt, filepath);
                 }
-            else
-            {
-                MessageBox.Show("There is no Leave you have taken, so report downloading is not possible");
-                return;
+                else
+                {
+                    MessageBox.Show("There is no Leave you have taken, so report downloading is not possible");
+                    return;
+                }
+
             }
-            
-        }
-            
-        catch (Exception ex)
+
+            catch (Exception ex)
             {
-                MessageBox.Show("Error creating Excel File - Please close the existing excel opened file first - "+ex.Message);
+                MessageBox.Show("Error creating Excel File - Please close the existing excel opened file first - " + ex.Message);
             }
 
         }
@@ -203,12 +211,17 @@ namespace LeaveManagementApp
                     sw.Write(sw.NewLine);
                 }
                 sw.Close();
-                MessageBox.Show("Report successfully downloaded at the path= "+ filepath);
+                MessageBox.Show("Report successfully downloaded at the path= " + filepath);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        private void ShowLeaveReport_FormClosing(object sender, FormClosingEventArgs e)
+        {
+              e.Cancel = false;
         }
     }
 }

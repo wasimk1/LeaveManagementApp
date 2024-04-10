@@ -56,6 +56,7 @@
             this.btnback.TabIndex = 4;
             this.btnback.Text = "Back to Home";
             this.btnback.UseVisualStyleBackColor = true;
+            this.btnback.Visible = false;
             this.btnback.Click += new System.EventHandler(this.btnback_Click);
             // 
             // label1
@@ -98,7 +99,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(13, 36);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(82, 23);
             this.button2.TabIndex = 0;
@@ -131,8 +132,9 @@
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ShowLeaveReport";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShowLeaveReport";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ShowLeaveReport_FormClosing);
             this.Load += new System.EventHandler(this.ShowLeaveReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
