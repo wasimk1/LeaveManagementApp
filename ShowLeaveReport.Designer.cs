@@ -42,15 +42,15 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 64);
+            this.dataGridView1.Location = new System.Drawing.Point(13, 80);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(600, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(755, 197);
             this.dataGridView1.TabIndex = 3;
             // 
             // btnback
             // 
-            this.btnback.Location = new System.Drawing.Point(513, 4);
+            this.btnback.Location = new System.Drawing.Point(669, 13);
             this.btnback.Name = "btnback";
             this.btnback.Size = new System.Drawing.Size(99, 23);
             this.btnback.TabIndex = 4;
@@ -62,15 +62,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(261, 9);
+            this.label1.Font = new System.Drawing.Font("Bahnschrift", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(268, -1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.Size = new System.Drawing.Size(189, 35);
             this.label1.TabIndex = 2;
             this.label1.Text = "Leave Report";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(458, 38);
+            this.textBox1.Location = new System.Drawing.Point(601, 54);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 1;
@@ -79,9 +80,10 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(563, 36);
+            this.button1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(703, 49);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 23);
+            this.button1.Size = new System.Drawing.Size(65, 28);
             this.button1.TabIndex = 2;
             this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = true;
@@ -90,18 +92,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(406, 41);
+            this.label2.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(539, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(58, 16);
             this.label2.TabIndex = 5;
             this.label2.Text = "Leave ID";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(13, 36);
+            this.button2.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(13, 41);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(82, 23);
+            this.button2.Size = new System.Drawing.Size(96, 30);
             this.button2.TabIndex = 0;
             this.button2.Text = "Show Report";
             this.button2.UseVisualStyleBackColor = true;
@@ -109,9 +113,10 @@
             // 
             // btndwnldrpt
             // 
-            this.btndwnldrpt.Location = new System.Drawing.Point(101, 36);
+            this.btndwnldrpt.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btndwnldrpt.Location = new System.Drawing.Point(115, 40);
             this.btndwnldrpt.Name = "btndwnldrpt";
-            this.btndwnldrpt.Size = new System.Drawing.Size(152, 23);
+            this.btndwnldrpt.Size = new System.Drawing.Size(179, 31);
             this.btndwnldrpt.TabIndex = 6;
             this.btndwnldrpt.Text = "Download Report to Excel";
             this.btndwnldrpt.UseVisualStyleBackColor = true;
@@ -121,7 +126,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 223);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.ClientSize = new System.Drawing.Size(775, 283);
             this.Controls.Add(this.btndwnldrpt);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
@@ -133,7 +139,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ShowLeaveReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ShowLeaveReport";
+            this.Text = "Show Leave Report";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ShowLeaveReport_FormClosing);
             this.Load += new System.EventHandler(this.ShowLeaveReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
