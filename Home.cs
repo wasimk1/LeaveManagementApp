@@ -37,7 +37,6 @@ namespace LeaveManagementApp
                 {
                     strcon = ConfigurationManager.ConnectionStrings["constr-PROBOOK"].ConnectionString;
                 }
-
                 con = new SqlConnection(strcon);
                 con.Open();
                 BindLeaveType();
@@ -218,6 +217,7 @@ namespace LeaveManagementApp
                 MessageBox.Show("Leave Applied successfully, LeaveID=" + modleaveid);
                 txtlvid.Text = modleaveid;
                 //con.Close();
+                cmd.Dispose();
             }
             catch (Exception ex)
             {
@@ -238,8 +238,8 @@ namespace LeaveManagementApp
                 string getleave = dtleavegen.Rows[0]["Column1"].ToString();
                 dtleavegen.Clear();
                 leaveid = Convert.ToInt32(getleave);
-
-
+                sd.Dispose();
+                cmd.Dispose();
             }
             catch (Exception ex)
             {
@@ -369,6 +369,7 @@ namespace LeaveManagementApp
                 SqlDataAdapter sd = new SqlDataAdapter(cmd1);
                 sd.Fill(dtgetleave);
                 sd.Dispose();
+                cmd1.Dispose();
                 if (dtgetleave.Rows.Count > 0)
                 {
                     passid = dtgetleave.Rows[0]["leaveid"].ToString();
@@ -387,13 +388,13 @@ namespace LeaveManagementApp
                 MessageBox.Show("Leave successfully deleted");
                 txtgetlvidfordel.Text = "";
                 txtgetlvidfordel.Focus();
-                //sr.Close();
+                sr.Close();
+                cmd.Dispose();
             }
             catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -473,10 +474,6 @@ namespace LeaveManagementApp
 
                 MessageBox.Show(ex.Message);
             }
-
-
         }
-
-
     }
 }
