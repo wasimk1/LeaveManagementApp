@@ -58,7 +58,7 @@
             this.btnapplyleave.Enabled = false;
             this.btnapplyleave.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnapplyleave.Location = new System.Drawing.Point(109, 171);
-            this.btnapplyleave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnapplyleave.Margin = new System.Windows.Forms.Padding(2);
             this.btnapplyleave.Name = "btnapplyleave";
             this.btnapplyleave.Size = new System.Drawing.Size(107, 39);
             this.btnapplyleave.TabIndex = 8;
@@ -71,7 +71,7 @@
             // 
             this.combxleavetype.FormattingEnabled = true;
             this.combxleavetype.Location = new System.Drawing.Point(110, 65);
-            this.combxleavetype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.combxleavetype.Margin = new System.Windows.Forms.Padding(2);
             this.combxleavetype.Name = "combxleavetype";
             this.combxleavetype.Size = new System.Drawing.Size(151, 21);
             this.combxleavetype.TabIndex = 1;
@@ -93,7 +93,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(109, 90);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
             this.dateTimePicker1.TabIndex = 2;
@@ -127,7 +127,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Location = new System.Drawing.Point(403, 94);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
             this.dateTimePicker2.TabIndex = 3;
@@ -137,7 +137,7 @@
             // txtnoofdays
             // 
             this.txtnoofdays.Location = new System.Drawing.Point(516, 118);
-            this.txtnoofdays.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtnoofdays.Margin = new System.Windows.Forms.Padding(2);
             this.txtnoofdays.Name = "txtnoofdays";
             this.txtnoofdays.ReadOnly = true;
             this.txtnoofdays.Size = new System.Drawing.Size(38, 20);
@@ -147,7 +147,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(109, 147);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.MaxLength = 500;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(445, 20);
@@ -259,7 +259,7 @@
             "Apply Leave",
             "Delete Applied Leave"});
             this.comboBox1.Location = new System.Drawing.Point(110, 41);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(151, 21);
             this.comboBox1.TabIndex = 0;
@@ -280,7 +280,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(265, 39);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(74, 24);
             this.button1.TabIndex = 11;
@@ -292,7 +292,7 @@
             // txtgetlvidfordel
             // 
             this.txtgetlvidfordel.Location = new System.Drawing.Point(110, 65);
-            this.txtgetlvidfordel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtgetlvidfordel.Margin = new System.Windows.Forms.Padding(2);
             this.txtgetlvidfordel.Name = "txtgetlvidfordel";
             this.txtgetlvidfordel.Size = new System.Drawing.Size(150, 20);
             this.txtgetlvidfordel.TabIndex = 18;
@@ -302,7 +302,7 @@
             // 
             this.btndel.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btndel.Location = new System.Drawing.Point(265, 64);
-            this.btndel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btndel.Margin = new System.Windows.Forms.Padding(2);
             this.btndel.Name = "btndel";
             this.btndel.Size = new System.Drawing.Size(74, 24);
             this.btndel.TabIndex = 19;
@@ -342,7 +342,7 @@
             this.Controls.Add(this.btnapplyleave);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Leave Management";

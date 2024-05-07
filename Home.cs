@@ -19,12 +19,12 @@ namespace LeaveManagementApp
         public static SqlConnection con = null;
         DataTable dtleavetype = new DataTable();
         DataTable dtshiftmode = new DataTable();
-        DataTable dtleavegen= new DataTable();  
+        DataTable dtleavegen = new DataTable();
         public static string startDate, endDate;
         public static int leaveid;
-        
+
         public static string strcon = ConfigurationManager.ConnectionStrings["constr-PAVILION-NB"].ConnectionString;
-        
+
         public Home()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace LeaveManagementApp
                 {
                     strcon = ConfigurationManager.ConnectionStrings["constr-PROBOOK"].ConnectionString;
                 }
-                
+
                 con = new SqlConnection(strcon);
                 con.Open();
                 BindLeaveType();
@@ -50,9 +50,9 @@ namespace LeaveManagementApp
                 MessageBox.Show("Server is not reachable at the moment, All Servers are buzy");
                 return;
             }
-            
+
         }
-        
+
         public void BindLeaveType()
         {
             try
@@ -75,7 +75,7 @@ namespace LeaveManagementApp
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         public void BindShiftMode()
@@ -96,7 +96,7 @@ namespace LeaveManagementApp
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -107,7 +107,7 @@ namespace LeaveManagementApp
             //    if (checkBox1.Checked == true)
             //    {
             //        cmBxshiftmode.Enabled = true;
-                    
+
             //    }
             //}
             //catch (Exception ex)
@@ -134,17 +134,17 @@ namespace LeaveManagementApp
                 checkBox1.Enabled = false;
                 cmBxshiftmode.Enabled = true;
             }
-            else if(Convert.ToInt32(txtnoofdays.Text) > 1)
+            else if (Convert.ToInt32(txtnoofdays.Text) > 1)
             {
                 label6.Text = "Total Days";
                 //cmBxshiftmode.Text = "";
                 checkBox1.Checked = false;
                 checkBox1.Enabled = false;
                 cmBxshiftmode.Enabled = false;
-                
-                
+
+
             }
-            
+
         }
 
         private void combxleavetype_SelectedIndexChanged(object sender, EventArgs e)
@@ -155,7 +155,7 @@ namespace LeaveManagementApp
             //    MessageBox.Show("Please select Leave type");
             //    combxleavetype.Focus();
             //    return;
-               
+
             //}
         }
 
@@ -200,32 +200,32 @@ namespace LeaveManagementApp
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
-        public void InsertIntoDBLeaveRecord(string lvtype,string sftype,string totdays,string lvcom, string stdt, string endt )
+        public void InsertIntoDBLeaveRecord(string lvtype, string sftype, string totdays, string lvcom, string stdt, string endt)
         {
             try
             {
                 CreateLeaveID();
                 string modleaveid = "LEV" + leaveid;
-                DateTime dateTime = DateTime.Now;   
-                string cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID) VALUES ('" + lvtype + "','" + sftype + "','" + totdays + "','" + lvcom + "','" + stdt + "','" + endt + "','"+dateTime.ToString("yyyy-MM-dd HH:mm:ss")+ "','"+ modleaveid + "')";
+                DateTime dateTime = DateTime.Now;
+                string cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID) VALUES ('" + lvtype + "','" + sftype + "','" + totdays + "','" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "')";
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 cmd.ExecuteNonQuery();
                 //con.Close();
                 btnapplyleave.Enabled = false;
-                
-                MessageBox.Show("Leave Applied successfully, LeaveID="+modleaveid);
+
+                MessageBox.Show("Leave Applied successfully, LeaveID=" + modleaveid);
                 txtlvid.Text = modleaveid;
-                con.Close();
+                //con.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);    
+                MessageBox.Show(ex.Message);
                 return;
             }
-            
-            
+
+
         }
         private void CreateLeaveID()
         {
@@ -238,16 +238,16 @@ namespace LeaveManagementApp
                 string getleave = dtleavegen.Rows[0]["Column1"].ToString();
                 dtleavegen.Clear();
                 leaveid = Convert.ToInt32(getleave);
-                
-                
+
+
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message);
                 return;
             }
-            
+
         }
         private void Home_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -265,7 +265,7 @@ namespace LeaveManagementApp
         {
             if (!string.IsNullOrEmpty(textBox1.Text))
             {
-                btnapplyleave.Enabled = true;   
+                btnapplyleave.Enabled = true;
             }
         }
 
@@ -280,20 +280,20 @@ namespace LeaveManagementApp
             //this.Hide();
             openReport.ShowDialog();
             //this.Close();
-            
+
         }
 
         private void comboBox1_Validating(object sender, CancelEventArgs e)
         {
-            string appstart= comboBox1.SelectedText.ToString().Trim();
-            if(appstart=="Apply Leave")
+            string appstart = comboBox1.SelectedText.ToString().Trim();
+            if (appstart == "Apply Leave")
             {
                 label1.Visible = true;
                 combxleavetype.Visible = true;
                 label2.Visible = true;
                 dateTimePicker1.Visible = true;
                 label3.Visible = true;
-                dateTimePicker2.Visible     = true;
+                dateTimePicker2.Visible = true;
                 label4.Visible = true;
                 checkBox1.Visible = true;
                 cmBxshiftmode.Visible = true;
@@ -307,14 +307,15 @@ namespace LeaveManagementApp
                 button1.Visible = true;
                 label1.Text = "Leave Type";
                 btndel.Visible = false;
+                txtgetlvidfordel.Visible = false;
             }
-            else if (appstart== "Delete Applied Leave")
+            else if (appstart == "Delete Applied Leave")
             {
-                label1.Visible= true;
+                label1.Visible = true;
                 label1.Text = "Enter the Leave ID";
                 txtgetlvidfordel.Visible = true;
-                btndel.Visible  = true;
-                button1.Visible= true;
+                btndel.Visible = true;
+                button1.Visible = true;
 
                 //label1.Visible = false;
                 combxleavetype.Visible = false;
@@ -335,7 +336,7 @@ namespace LeaveManagementApp
 
 
             }
-            
+
             else
             {
                 label1.Visible = false;
@@ -356,18 +357,20 @@ namespace LeaveManagementApp
                 txtlvid.Visible = false;
             }
         }
-        public void DeleteAppliedLeave (string getlvid){
+        public void DeleteAppliedLeave(string getlvid)
+        {
             try
             {
                 string passid = "";
                 DataTable dtgetleave = new DataTable();
                 dtgetleave.Clear();
-                string scmd = "select leaveid from leave_records where leaveid='"+ getlvid + "'";
-                SqlCommand cmd1=new SqlCommand(scmd,con);
-                SqlDataAdapter sd= new SqlDataAdapter(cmd1);
+                string scmd = "select leaveid from leave_records where leaveid='" + getlvid + "'";
+                SqlCommand cmd1 = new SqlCommand(scmd, con);
+                SqlDataAdapter sd = new SqlDataAdapter(cmd1);
                 sd.Fill(dtgetleave);
                 sd.Dispose();
-                if (dtgetleave.Rows.Count > 0){
+                if (dtgetleave.Rows.Count > 0)
+                {
                     passid = dtgetleave.Rows[0]["leaveid"].ToString();
                 }
                 else
@@ -377,20 +380,20 @@ namespace LeaveManagementApp
                     txtgetlvidfordel.Focus();
                     return;
                 }
-                
+                //con.Open();
                 string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + passid + "'";
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 SqlDataReader sr = cmd.ExecuteReader();
                 MessageBox.Show("Leave successfully deleted");
                 txtgetlvidfordel.Text = "";
                 txtgetlvidfordel.Focus();
-                sr.Close();
+                //sr.Close();
             }
             catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -422,14 +425,14 @@ namespace LeaveManagementApp
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void btndel_Click(object sender, EventArgs e)
         {
             try
             {
-                
+
                 if (string.IsNullOrEmpty(txtgetlvidfordel.Text.ToUpper().Trim()))
                 {
                     MessageBox.Show("Please enter the valid Leave ID");
@@ -445,8 +448,8 @@ namespace LeaveManagementApp
 
                 throw;
             }
-            
-            
+
+
         }
 
         private void cmBxshiftmode_Validating(object sender, CancelEventArgs e)
@@ -470,10 +473,10 @@ namespace LeaveManagementApp
 
                 MessageBox.Show(ex.Message);
             }
-            
-            
+
+
         }
 
-        
+
     }
 }
