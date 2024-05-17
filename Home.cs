@@ -140,8 +140,6 @@ namespace LeaveManagementApp
                 checkBox1.Checked = false;
                 checkBox1.Enabled = false;
                 cmBxshiftmode.Enabled = false;
-
-
             }
 
         }
@@ -224,8 +222,6 @@ namespace LeaveManagementApp
                 MessageBox.Show(ex.Message);
                 return;
             }
-
-
         }
         private void CreateLeaveID()
         {
@@ -243,7 +239,6 @@ namespace LeaveManagementApp
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
                 return;
             }
@@ -316,7 +311,6 @@ namespace LeaveManagementApp
                 txtgetlvidfordel.Visible = true;
                 btndel.Visible = true;
                 button1.Visible = true;
-
                 //label1.Visible = false;
                 combxleavetype.Visible = false;
                 label2.Visible = false;
@@ -333,8 +327,6 @@ namespace LeaveManagementApp
                 btnapplyleave.Visible = false;
                 label8.Visible = false;
                 txtlvid.Visible = false;
-
-
             }
 
             else
