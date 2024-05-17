@@ -381,7 +381,7 @@ namespace LeaveManagementApp
                     txtgetlvidfordel.Focus();
                     return;
                 }
-                //con.Open();
+                con.Open();
                 string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + passid + "'";
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 SqlDataReader sr = cmd.ExecuteReader();

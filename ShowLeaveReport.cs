@@ -221,7 +221,8 @@ namespace LeaveManagementApp
 
         private void ShowLeaveReport_FormClosing(object sender, FormClosingEventArgs e)
         {
-              e.Cancel = false;
+            e.Cancel = false;
+            Home.con.Close();
         }
     }
 }
