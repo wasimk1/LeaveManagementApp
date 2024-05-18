@@ -65,7 +65,6 @@ namespace LeaveManagementApp
                 //DataRow row = dtleavetype.NewRow();
                 //row[0] = "Please Select";
                 //dtleavetype.Rows.InsertAt(row, 0);
-
                 combxleavetype.DataSource = dtleavetype;
                 combxleavetype.DisplayMember = "LEAVE_TYPE";
                 combxleavetype.ValueMember = "LEAVE_TYPE";
@@ -303,6 +302,7 @@ namespace LeaveManagementApp
                 label1.Text = "Leave Type";
                 btndel.Visible = false;
                 txtgetlvidfordel.Visible = false;
+                comboBox1.Enabled= false; // For disabling the combo box after selecting the item 
             }
             else if (appstart == "Delete Applied Leave")
             {
@@ -327,6 +327,7 @@ namespace LeaveManagementApp
                 btnapplyleave.Visible = false;
                 label8.Visible = false;
                 txtlvid.Visible = false;
+                comboBox1.Enabled = false; // For disabling the combo box after selecting the item 
             }
 
             else
@@ -413,6 +414,7 @@ namespace LeaveManagementApp
                 txtlvid.Visible = false;
                 txtgetlvidfordel.Visible = false;
                 btndel.Visible = false;
+                comboBox1.Enabled = true; // Modified for cancelling the Leave applying process
             }
             catch (Exception ex)
             {
