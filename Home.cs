@@ -487,6 +487,7 @@ namespace LeaveManagementApp
                         textBox2.ReadOnly= true;
                         textBox3.ReadOnly= true;
                         btnSubmit.Enabled = false;
+                        btnLogout.Enabled = false;
                     }
                     else
                     {

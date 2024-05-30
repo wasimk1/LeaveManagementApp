@@ -110,8 +110,8 @@ namespace LeaveManagementApp
             try
             {
                 dtFillLeaveRpt.Clear();
-                showTotCasandSickLV();
-                showtotalLeave();
+                showTotCasualandSickLV();
+                showTotLeaveTaken();
 
                 //string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY],EXTRA_WORK [EXTRA WORK], STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS order by id desc";
                 string cmdstr = "SELECT  LR.LEAVEID, LR.TXT_LEAVE_TYPE [LEAVE TYPE],LR.TXT_SHIFT_TYPE [SHIFT TYPE],LR.HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY],LR.EXTRA_WORK [EXTRA WORK], LR.STARTDATE [FROM DATE],LR.ENDDATE [TO DATE] ,LR.LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='" + Home.username + "' ORDER BY LR.ID DESC";
@@ -138,12 +138,13 @@ namespace LeaveManagementApp
             }
         }
 
-        public void showtotalLeave()
+        public void showTotLeaveTaken()
         {
             try
             {
                 DataTable dt = new DataTable();
-                string cmdstr = "SELECT SUM(HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS";
+                //string cmdstr = "SELECT SUM(HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS";
+                string cmdstr = "SELECT SUM(LR.HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(LR.EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='"+Home.username+"'";
                 SqlCommand cmd2 = new SqlCommand(cmdstr, Home.con);
                 SqlDataAdapter sd = new SqlDataAdapter(cmd2);
                 sd.Fill(dt);
@@ -164,11 +165,11 @@ namespace LeaveManagementApp
             }
         }
 
-        public void showTotCasandSickLV() {
+        public void showTotCasualandSickLV() {
             try
             {
                 DataTable dt = new DataTable();
-                string cmdstr = "SELECT TOT_SICK_LV,TOT_CASUAL_LV FROM USERS_RECORDS WHERE TXT_NAME='WASIM'";
+                string cmdstr = "SELECT TOT_SICK_LV,TOT_CASUAL_LV FROM USERS_RECORDS WHERE TXT_NAME='"+Home.username+"'";
                 SqlCommand cmd2 = new SqlCommand(cmdstr, Home.con);
                 SqlDataAdapter sd = new SqlDataAdapter(cmd2);
                 sd.Fill(dt);

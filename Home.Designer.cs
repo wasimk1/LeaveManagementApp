@@ -56,6 +56,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnapplyleave
@@ -322,9 +323,10 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(18, 51);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(55, 13);
+            this.label10.Size = new System.Drawing.Size(68, 16);
             this.label10.TabIndex = 20;
             this.label10.Text = "Username";
             // 
@@ -346,21 +348,34 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(18, 80);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 13);
+            this.label11.Size = new System.Drawing.Size(66, 16);
             this.label11.TabIndex = 22;
             this.label11.Text = "Password";
             // 
             // btnSubmit
             // 
+            this.btnSubmit.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.Location = new System.Drawing.Point(110, 103);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(75, 23);
+            this.btnSubmit.Size = new System.Drawing.Size(68, 38);
             this.btnSubmit.TabIndex = 24;
             this.btnSubmit.Text = "Login";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Enabled = false;
+            this.btnLogout.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.Location = new System.Drawing.Point(192, 103);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(68, 38);
+            this.btnLogout.TabIndex = 25;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
             // 
             // Home
             // 
@@ -368,6 +383,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(567, 357);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label11);
@@ -439,6 +455,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Button btnLogout;
     }
 }
 
