@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +21,7 @@ namespace LeaveManagementApp
         DataTable dtFillLeaveRpt = new DataTable();
         string getleaveid = "";
         string filepath = @"C:\Leave_Management_Report\Leave_Management_Report.csv";
+       
         public ShowLeaveReport()
         {
             InitializeComponent();
@@ -74,7 +76,8 @@ namespace LeaveManagementApp
                 }
                 else
                 {
-                    string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / WORKING HOURS],STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS where LEAVEID='" + getleaveid + "'";
+                    //string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY], EXTRA_WORK [EXTRA WORK], STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS where LEAVEID='" + getleaveid + "'";
+                    string cmdstr = "SELECT  LR.LEAVEID, LR.TXT_LEAVE_TYPE [LEAVE TYPE],LR.TXT_SHIFT_TYPE [SHIFT TYPE],LR.HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY], LR.EXTRA_WORK [EXTRA WORK],LR.STARTDATE [FROM DATE],LR.ENDDATE [TO DATE] ,LR.LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='"+Home.username+"' and LEAVEID='LEV1056' ";
                     SqlCommand cmd = new SqlCommand(cmdstr, Home.con);
                     SqlDataAdapter sd = new SqlDataAdapter(cmd);
                     sd.Fill(dtFillLeaveRpt);
@@ -93,7 +96,7 @@ namespace LeaveManagementApp
 
                 }
 
-                Home.con.Close();
+                //Home.con.Close();
             }
             catch (Exception ex)
             {
@@ -107,7 +110,11 @@ namespace LeaveManagementApp
             try
             {
                 dtFillLeaveRpt.Clear();
-                string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / WORKING HOURS],STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS order by id desc";
+                showTotCasandSickLV();
+                showtotalLeave();
+
+                //string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY],EXTRA_WORK [EXTRA WORK], STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS order by id desc";
+                string cmdstr = "SELECT  LR.LEAVEID, LR.TXT_LEAVE_TYPE [LEAVE TYPE],LR.TXT_SHIFT_TYPE [SHIFT TYPE],LR.HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY],LR.EXTRA_WORK [EXTRA WORK], LR.STARTDATE [FROM DATE],LR.ENDDATE [TO DATE] ,LR.LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='" + Home.username + "' ORDER BY LR.ID DESC";
                 SqlCommand cmd = new SqlCommand(cmdstr, Home.con);
                 SqlDataAdapter sd = new SqlDataAdapter(cmd);
                 sd.Fill(dtFillLeaveRpt);
@@ -122,7 +129,7 @@ namespace LeaveManagementApp
                     return;
                 }
                 button2.Text = "Referesh";
-                Home.con.Close();
+                //Home.con.Close();
             }
             catch (Exception ex)
             {
@@ -131,6 +138,55 @@ namespace LeaveManagementApp
             }
         }
 
+        public void showtotalLeave()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string cmdstr = "SELECT SUM(HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS";
+                SqlCommand cmd2 = new SqlCommand(cmdstr, Home.con);
+                SqlDataAdapter sd = new SqlDataAdapter(cmd2);
+                sd.Fill(dt);
+                sd.Dispose();
+
+                if(dt.Rows.Count > 0)
+                {
+                    textBox2.Text = dt.Rows[0]["TotalTakenLeave"].ToString();
+                    textBox3.Text = dt.Rows[0]["ExtraWork"].ToString();
+                    //decimal tatal=Math.
+                    textBox4.Text=((18 - Convert.ToDouble(textBox2.Text))+Convert.ToDouble(textBox3.Text)).ToString();
+                }
+                cmd2.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void showTotCasandSickLV() {
+            try
+            {
+                DataTable dt = new DataTable();
+                string cmdstr = "SELECT TOT_SICK_LV,TOT_CASUAL_LV FROM USERS_RECORDS WHERE TXT_NAME='WASIM'";
+                SqlCommand cmd2 = new SqlCommand(cmdstr, Home.con);
+                SqlDataAdapter sd = new SqlDataAdapter(cmd2);
+                sd.Fill(dt);
+                sd.Dispose();
+
+                if (dt.Rows.Count > 0)
+                {
+                    textBox5.Text = dt.Rows[0]["TOT_CASUAL_LV"].ToString();
+                    textBox6.Text = dt.Rows[0]["TOT_SICK_LV"].ToString();
+                    textBox7.Text = Convert.ToString(Convert.ToInt32(textBox5.Text) + Convert.ToInt32(textBox6.Text));
+                }
+                cmd2.Dispose();
+            }
+            catch (Exception ex)
+            {
+                  MessageBox.Show(ex.Message) ;
+            }
+        }
         private void btndwnldrpt_Click(object sender, EventArgs e)
         {
             try
@@ -150,7 +206,8 @@ namespace LeaveManagementApp
                     }
                 }
                 dtFillLeaveRpt.Clear();
-                string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / WORKING HOURS],STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS order by id desc";
+                //string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY],EXTRA_WORK [EXTRA WORK], STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS order by id desc";
+                string cmdstr = "SELECT  LR.LEAVEID, LR.TXT_LEAVE_TYPE [LEAVE TYPE],LR.TXT_SHIFT_TYPE [SHIFT TYPE],LR.HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY],LR.EXTRA_WORK [EXTRA WORK], LR.STARTDATE [FROM DATE],LR.ENDDATE [TO DATE] ,LR.LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='" + Home.username + "' ORDER BY LR.ID DESC";
                 SqlCommand cmd = new SqlCommand(cmdstr, Home.con);
                 SqlDataAdapter sd = new SqlDataAdapter(cmd);
                 sd.Fill(dtFillLeaveRpt);
@@ -222,7 +279,7 @@ namespace LeaveManagementApp
         private void ShowLeaveReport_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = false;
-            Home.con.Close();
+            //Home.con.Close();
         }
     }
 }

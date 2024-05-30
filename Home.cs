@@ -11,6 +11,8 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LeaveManagementApp
 {
@@ -22,7 +24,7 @@ namespace LeaveManagementApp
         DataTable dtleavegen = new DataTable();
         public static string startDate, endDate;
         public static int leaveid;
-
+        public static string username = string.Empty;
         public static string strcon = ConfigurationManager.ConnectionStrings["constr-PAVILION-NB"].ConnectionString;
 
         public Home()
@@ -163,7 +165,7 @@ namespace LeaveManagementApp
                 string getShiftType = cmBxshiftmode.SelectedValue.ToString();
                 if (checkBox1.Checked == true)
                 {
-                    if (getShiftType == "4.5")
+                    if (getShiftType == "0.5")
                     {
                         if (cmBxshiftmode.SelectedText == "FIRST HALF")
                         {
@@ -202,10 +204,20 @@ namespace LeaveManagementApp
         {
             try
             {
+                //con.Open();
                 CreateLeaveID();
+                string cmdstr = string.Empty;
                 string modleaveid = "LEV" + leaveid;
                 DateTime dateTime = DateTime.Now;
-                string cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID) VALUES ('" + lvtype + "','" + sftype + "','" + totdays + "','" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "')";
+                if (combxleavetype.SelectedValue.ToString() == "EXTRA WORKING")
+                {
+                    cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID,EXTRA_WORK,TXT_NAME) VALUES ('" + lvtype + "','" + sftype + "',0,'" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "'," + totdays + ",'"+ textBox2.Text.ToUpper().Trim() + "')";
+                }
+                else
+                {
+                    cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID,EXTRA_WORK,TXT_NAME) VALUES ('" + lvtype + "','" + sftype + "'," + totdays + ",'" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "',0,'"+ textBox2.Text.ToUpper().Trim() + "')";
+                }
+                //string cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID) VALUES ('" + lvtype + "','" + sftype + "','" + totdays + "','" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "')";
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 cmd.ExecuteNonQuery();
                 //con.Close();
@@ -302,7 +314,7 @@ namespace LeaveManagementApp
                 label1.Text = "Leave Type";
                 btndel.Visible = false;
                 txtgetlvidfordel.Visible = false;
-                comboBox1.Enabled= false; // For disabling the combo box after selecting the item 
+                comboBox1.Enabled = false; // For disabling the combo box after selecting the item 
             }
             else if (appstart == "Delete Applied Leave")
             {
@@ -357,7 +369,7 @@ namespace LeaveManagementApp
                 string passid = "";
                 DataTable dtgetleave = new DataTable();
                 dtgetleave.Clear();
-                string scmd = "select leaveid from leave_records where leaveid='" + getlvid + "'";
+                string scmd = "SELECT LEAVEID FROM LEAVE_RECORDS WHERE LEAVEID='" + getlvid + "'";
                 SqlCommand cmd1 = new SqlCommand(scmd, con);
                 SqlDataAdapter sd = new SqlDataAdapter(cmd1);
                 sd.Fill(dtgetleave);
@@ -374,8 +386,8 @@ namespace LeaveManagementApp
                     txtgetlvidfordel.Focus();
                     return;
                 }
-                con.Open();
-                string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + passid + "'";
+                //con.Open();
+                string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + passid + "','"+ textBox2.Text.ToUpper().Trim() + "'";
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 SqlDataReader sr = cmd.ExecuteReader();
                 MessageBox.Show("Leave successfully deleted");
@@ -447,15 +459,59 @@ namespace LeaveManagementApp
 
         }
 
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+
+                DateTime d = DateTime.Now;
+                string date = d.ToString("dd");
+                string time = d.ToString("HH");
+                string today = date + time;
+                DataTable dt = new DataTable();
+                string cmdstr = "SELECT TXT_NAME,TOT_SICK_LV, TOT_CASUAL_LV  FROM  USERS_RECORDS where TXT_NAME='"+ textBox2.Text.ToUpper().Trim() + "'";
+                SqlCommand cmd2 = new SqlCommand(cmdstr, Home.con);
+                SqlDataAdapter sd = new SqlDataAdapter(cmd2);
+                sd.Fill(dt);
+                sd.Dispose();
+
+                if (dt.Rows.Count > 0)
+                {
+                    if (textBox2.Text.ToUpper().Trim() == dt.Rows[0]["TXT_NAME"].ToString() && textBox3.Text== today)
+                    {
+                        username = textBox2.Text.ToUpper().Trim();
+                        label9.Visible = true;
+                        comboBox1.Visible= true;
+                        btnlvreport.Visible= true;
+                        textBox2.ReadOnly= true;
+                        textBox3.ReadOnly= true;
+                        btnSubmit.Enabled = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("User is invalid"); return;
+                    }
+                }
+                
+                cmd2.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
         private void cmBxshiftmode_Validating(object sender, CancelEventArgs e)
         {
             try
             {
                 Double selval = Convert.ToDouble(cmBxshiftmode.SelectedValue);
-                if (selval == 4.5)
+                if (selval == 0.5)
                 {
                     txtnoofdays.Text = selval.ToString();
-                    label6.Text = "Total working hours";
+                    label6.Text = "Half Day";
                 }
                 else
                 {
