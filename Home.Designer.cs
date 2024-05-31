@@ -152,11 +152,12 @@
             // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(109, 252);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.MaxLength = 500;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(445, 20);
+            this.textBox1.Size = new System.Drawing.Size(445, 22);
             this.textBox1.TabIndex = 7;
             this.textBox1.Visible = false;
             this.textBox1.WordWrap = false;
@@ -332,17 +333,19 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(110, 51);
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(109, 45);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 20);
+            this.textBox2.Size = new System.Drawing.Size(150, 26);
             this.textBox2.TabIndex = 21;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(110, 77);
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(110, 75);
             this.textBox3.Name = "textBox3";
             this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(150, 20);
+            this.textBox3.Size = new System.Drawing.Size(150, 26);
             this.textBox3.TabIndex = 23;
             // 
             // label11
@@ -360,7 +363,7 @@
             this.btnSubmit.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.Location = new System.Drawing.Point(110, 103);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(68, 38);
+            this.btnSubmit.Size = new System.Drawing.Size(68, 28);
             this.btnSubmit.TabIndex = 24;
             this.btnSubmit.Text = "Login";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -372,10 +375,11 @@
             this.btnLogout.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Location = new System.Drawing.Point(192, 103);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(68, 38);
+            this.btnLogout.Size = new System.Drawing.Size(68, 28);
             this.btnLogout.TabIndex = 25;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // Home
             // 
