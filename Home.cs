@@ -190,6 +190,22 @@ namespace LeaveManagementApp
                     getShiftType = "FULL DAY"; //+ txtnoofdays.Text + " Day taken holiday";
                 }
 
+                DataTable dt = new DataTable();
+                string cmd = "SELECT SUM(LR.HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(LR.EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='" + Home.username + "'";
+                SqlCommand sql = new SqlCommand(cmd, con);
+                SqlDataAdapter sd = new SqlDataAdapter(sql);
+                sd.Fill(dt);
+                sd.Dispose();
+
+                string t = dt.Rows[0]["TotalTakenLeave"].ToString();
+                string t1 = dt.Rows[0]["ExtraWork"].ToString();
+                Double tot = Convert.ToDouble(t1) * Convert.ToDouble(t);
+                if (Convert.ToDouble(txtnoofdays.Text) > tot)
+                {
+                    MessageBox.Show("You are trying to apply a Leave grater than your ramaining Leave, Not possible! You only have " + tot + " Leave remaining");
+                    return;
+                }
+
                 //MessageBox.Show(getLeaveType + " " + getShiftType + " "+startDate +" "+ endDate +" "+ txtnoofdays.Text + " "+ textBox1.Text);
                 InsertIntoDBLeaveRecord(getLeaveType, getShiftType, txtnoofdays.Text, textBox1.Text, startDate, endDate);
 
@@ -354,7 +370,7 @@ namespace LeaveManagementApp
 
                 throw;
             }
-            
+
         }
         private void comboBox1_Validating(object sender, CancelEventArgs e)
         {
@@ -514,7 +530,7 @@ namespace LeaveManagementApp
                         textBox3.ReadOnly = true;
                         btnSubmit.Enabled = false;
                         btnLogout.Enabled = true;
-                        comboBox1.Visible=true;
+                        comboBox1.Visible = true;
                         comboBox1.Enabled = true;
                     }
                     else
@@ -564,30 +580,35 @@ namespace LeaveManagementApp
                 btnapplyleave.Visible = false;
                 label8.Visible = false;
                 txtlvid.Visible = false;
-                label9.Visible=false;
+                label9.Visible = false;
                 comboBox1.Visible = false;
                 comboBox1.Text = "";
                 btnlvreport.Visible = false;
                 button1.Visible = false;
                 btndel.Visible = false;
-                txtgetlvidfordel.Visible = false;   
+                txtgetlvidfordel.Visible = false;
             }
             catch (Exception)
             {
 
                 throw;
-            }   
+            }
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
             username = "";
             textBox2.Text = string.Empty;
             textBox3.Text = string.Empty;
-            btnLogout.Enabled=false;
+            btnLogout.Enabled = false;
             btnSubmit.Enabled = true;
             textBox2.ReadOnly = false;
             textBox3.ReadOnly = false;
             HideonLogout();
+        }
+
+        private void txtnoofdays_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void cmBxshiftmode_Validating(object sender, CancelEventArgs e)

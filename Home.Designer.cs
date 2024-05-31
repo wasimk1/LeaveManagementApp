@@ -149,6 +149,7 @@
             this.txtnoofdays.Size = new System.Drawing.Size(38, 20);
             this.txtnoofdays.TabIndex = 4;
             this.txtnoofdays.Visible = false;
+            this.txtnoofdays.TextChanged += new System.EventHandler(this.txtnoofdays_TextChanged);
             // 
             // textBox1
             // 

@@ -21,7 +21,7 @@ namespace LeaveManagementApp
         DataTable dtFillLeaveRpt = new DataTable();
         string getleaveid = "";
         string filepath = @"C:\Leave_Management_Report\Leave_Management_Report.csv";
-       
+
         public ShowLeaveReport()
         {
             InitializeComponent();
@@ -77,7 +77,7 @@ namespace LeaveManagementApp
                 else
                 {
                     //string cmdstr = "SELECT  LEAVEID, TXT_LEAVE_TYPE [LEAVE TYPE],TXT_SHIFT_TYPE [SHIFT TYPE],HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY], EXTRA_WORK [EXTRA WORK], STARTDATE [FROM DATE],ENDDATE [TO DATE] ,LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS where LEAVEID='" + getleaveid + "'";
-                    string cmdstr = "SELECT  LR.LEAVEID, LR.TXT_LEAVE_TYPE [LEAVE TYPE],LR.TXT_SHIFT_TYPE [SHIFT TYPE],LR.HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY], LR.EXTRA_WORK [EXTRA WORK],LR.STARTDATE [FROM DATE],LR.ENDDATE [TO DATE] ,LR.LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='"+Home.username+"' and LEAVEID='"+ getleaveid + "' ";
+                    string cmdstr = "SELECT  LR.LEAVEID, LR.TXT_LEAVE_TYPE [LEAVE TYPE],LR.TXT_SHIFT_TYPE [SHIFT TYPE],LR.HOLIDAY_OR_WORKING_HRS [HOLIDAY / HALF_DAY], LR.EXTRA_WORK [EXTRA WORK],LR.STARTDATE [FROM DATE],LR.ENDDATE [TO DATE] ,LR.LEAVE_COMMENT [LEAVE COMMENT] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='" + Home.username + "' and LEAVEID='" + getleaveid + "' ";
                     SqlCommand cmd = new SqlCommand(cmdstr, Home.con);
                     SqlDataAdapter sd = new SqlDataAdapter(cmd);
                     sd.Fill(dtFillLeaveRpt);
@@ -144,18 +144,18 @@ namespace LeaveManagementApp
             {
                 DataTable dt = new DataTable();
                 //string cmdstr = "SELECT SUM(HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS";
-                string cmdstr = "SELECT SUM(LR.HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(LR.EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='"+Home.username+"'";
+                string cmdstr = "SELECT SUM(LR.HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(LR.EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='" + Home.username + "'";
                 SqlCommand cmd2 = new SqlCommand(cmdstr, Home.con);
                 SqlDataAdapter sd = new SqlDataAdapter(cmd2);
                 sd.Fill(dt);
                 sd.Dispose();
 
-                if(dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0)
                 {
                     textBox2.Text = dt.Rows[0]["TotalTakenLeave"].ToString();
                     textBox3.Text = dt.Rows[0]["ExtraWork"].ToString();
                     //decimal tatal=Math.
-                    textBox4.Text=((18 - Convert.ToDouble(textBox2.Text))+Convert.ToDouble(textBox3.Text)).ToString();
+                    textBox4.Text = ((18 - Convert.ToDouble(textBox2.Text)) + Convert.ToDouble(textBox3.Text)).ToString();
                 }
                 cmd2.Dispose();
             }
@@ -165,11 +165,12 @@ namespace LeaveManagementApp
             }
         }
 
-        public void showTotCasualandSickLV() {
+        public void showTotCasualandSickLV()
+        {
             try
             {
                 DataTable dt = new DataTable();
-                string cmdstr = "SELECT TOT_SICK_LV,TOT_CASUAL_LV FROM USERS_RECORDS WHERE TXT_NAME='"+Home.username+"'";
+                string cmdstr = "SELECT TOT_SICK_LV,TOT_CASUAL_LV FROM USERS_RECORDS WHERE TXT_NAME='" + Home.username + "'";
                 SqlCommand cmd2 = new SqlCommand(cmdstr, Home.con);
                 SqlDataAdapter sd = new SqlDataAdapter(cmd2);
                 sd.Fill(dt);
@@ -185,7 +186,7 @@ namespace LeaveManagementApp
             }
             catch (Exception ex)
             {
-                  MessageBox.Show(ex.Message) ;
+                MessageBox.Show(ex.Message);
             }
         }
         private void btndwnldrpt_Click(object sender, EventArgs e)
