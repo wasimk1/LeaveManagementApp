@@ -26,7 +26,7 @@ namespace LeaveManagementApp
         public static int leaveid;
         public static string username = string.Empty;
         public static string strcon = ConfigurationManager.ConnectionStrings["constr-PAVILION-NB"].ConnectionString;
-
+        Double tot = 0;
         public Home()
         {
             InitializeComponent();
@@ -191,20 +191,33 @@ namespace LeaveManagementApp
                 }
 
                 DataTable dt = new DataTable();
-                string cmd = "SELECT SUM(LR.HOLIDAY_OR_WORKING_HRS)[TotalTakenLeave],sum(LR.EXTRA_WORK)[ExtraWork] FROM LEAVE_RECORDS LR INNER JOIN USERS_RECORDS UR ON LR.TXT_NAME = UR.TXT_NAME WHERE UR.TXT_NAME='" + Home.username + "'";
-                SqlCommand sql = new SqlCommand(cmd, con);
+                
+                // string cmd = "select sum(TOT_CASUAL_LV + TOT_SICK_LV)[TOTAL]  from USERS_RECORDS where TXT_NAME='"+username+"'"; 
+                string cmd = "select ALL_BAL_LEAVE from USERS_RECORDS where TXT_NAME='"+username+"'";
+                SqlCommand sql = new SqlCommand(cmd, con); 
                 SqlDataAdapter sd = new SqlDataAdapter(sql);
                 sd.Fill(dt);
                 sd.Dispose();
-
-                string t = dt.Rows[0]["TotalTakenLeave"].ToString();
-                string t1 = dt.Rows[0]["ExtraWork"].ToString();
-                Double tot = Convert.ToDouble(t1) * Convert.ToDouble(t);
-                if (Convert.ToDouble(txtnoofdays.Text) > tot)
+                if (dt.Rows.Count > 0)
                 {
-                    MessageBox.Show("You are trying to apply a Leave grater than your ramaining Leave, Not possible! You only have " + tot + " Leave remaining");
-                    return;
+                    //if(dt.Rows[0]["TotalTakenLeave"].ToString()=="" && dt.Rows[0]["TotalTakenLeave"].ToString() == "")
+                    //{
+                    //     tot = Convert.ToDouble("0");
+                    //}
+                    //else
+                    //{
+                    //    string t = dt.Rows[0]["TotalTakenLeave"].ToString();
+                    //    string t1 = dt.Rows[0]["ExtraWork"].ToString();
+                    //     tot = Convert.ToDouble(t1) * Convert.ToDouble(t);
+                    //}
+                    tot = Convert.ToDouble(dt.Rows[0]["ALL_BAL_LEAVE"].ToString());
+                    if (Convert.ToDouble(txtnoofdays.Text) > tot)
+                    {
+                        MessageBox.Show("You are trying to apply a Leave grater than your ramaining Leave, Not possible! You only have " + tot + " Leave remaining");
+                        return;
+                    }
                 }
+                
 
                 //MessageBox.Show(getLeaveType + " " + getShiftType + " "+startDate +" "+ endDate +" "+ txtnoofdays.Text + " "+ textBox1.Text);
                 InsertIntoDBLeaveRecord(getLeaveType, getShiftType, txtnoofdays.Text, textBox1.Text, startDate, endDate);
@@ -223,19 +236,32 @@ namespace LeaveManagementApp
                 //con.Open();
                 CreateLeaveID();
                 string cmdstr = string.Empty;
+                string cmdstr1 = string.Empty;
                 string modleaveid = "LEV" + leaveid;
                 DateTime dateTime = DateTime.Now;
                 if (combxleavetype.SelectedValue.ToString() == "EXTRA WORKING")
                 {
                     cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID,EXTRA_WORK,TXT_NAME) VALUES ('" + lvtype + "','" + sftype + "',0,'" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "'," + totdays + ",'" + textBox2.Text.ToUpper().Trim() + "')";
+                    double findtot = (tot + Convert.ToDouble(totdays));
+                    cmdstr1 = "UPDATE USERS_RECORDS SET ALL_BAL_LEAVE=" + findtot + " where TXT_NAME='" + username + "'";
+
                 }
                 else
                 {
                     cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID,EXTRA_WORK,TXT_NAME) VALUES ('" + lvtype + "','" + sftype + "'," + totdays + ",'" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "',0,'" + textBox2.Text.ToUpper().Trim() + "')";
+                    
+                    
+                    double findtot = (tot - Convert.ToDouble(totdays));
+                     cmdstr1 = "UPDATE USERS_RECORDS SET ALL_BAL_LEAVE=" + findtot + " where TXT_NAME='" + username + "'";
                 }
                 //string cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID) VALUES ('" + lvtype + "','" + sftype + "','" + totdays + "','" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "')";
+
+                
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 cmd.ExecuteNonQuery();
+
+                SqlCommand cmd1 = new SqlCommand(cmdstr1, con);
+                cmd1.ExecuteNonQuery();
                 //con.Close();
                 btnapplyleave.Enabled = false;
 
@@ -243,6 +269,7 @@ namespace LeaveManagementApp
                 txtlvid.Text = modleaveid;
                 //con.Close();
                 cmd.Dispose();
+                cmd1.Dispose();
             }
             catch (Exception ex)
             {
@@ -429,7 +456,7 @@ namespace LeaveManagementApp
                     return;
                 }
                 //con.Open();
-                string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + passid + "','" + textBox2.Text.ToUpper().Trim() + "'";
+                string cmdstr = "delete from LEAVE_RECORDS where LEAVEID='" + passid + "'and  txt_name='" + textBox2.Text.ToUpper().Trim() + "'";
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 SqlDataReader sr = cmd.ExecuteReader();
                 MessageBox.Show("Leave successfully deleted");

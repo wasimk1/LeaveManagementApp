@@ -11,6 +11,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LeaveManagementApp
 {
@@ -20,7 +21,7 @@ namespace LeaveManagementApp
         //string strcon = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         DataTable dtFillLeaveRpt = new DataTable();
         string getleaveid = "";
-        string filepath = @"C:\Leave_Management_Report\Leave_Management_Report.csv";
+        string filepath = @"C:\Leave_Management_Report\Leave_Management_Report_"+Home.username+".csv";
 
         public ShowLeaveReport()
         {
@@ -110,6 +111,7 @@ namespace LeaveManagementApp
             try
             {
                 dtFillLeaveRpt.Clear();
+                textBox1.Text = "";
                 showTotCasualandSickLV();
                 showTotLeaveTaken();
 
@@ -154,6 +156,11 @@ namespace LeaveManagementApp
                 {
                     textBox2.Text = dt.Rows[0]["TotalTakenLeave"].ToString();
                     textBox3.Text = dt.Rows[0]["ExtraWork"].ToString();
+                    if(textBox2.Text=="" && textBox3.Text=="")
+                    {
+                        textBox2.Text = "0";
+                        textBox3.Text = "0";
+                    }
                     //decimal tatal=Math.
                     textBox4.Text = ((18 - Convert.ToDouble(textBox2.Text)) + Convert.ToDouble(textBox3.Text)).ToString();
                 }
@@ -181,6 +188,7 @@ namespace LeaveManagementApp
                     textBox5.Text = dt.Rows[0]["TOT_CASUAL_LV"].ToString();
                     textBox6.Text = dt.Rows[0]["TOT_SICK_LV"].ToString();
                     textBox7.Text = Convert.ToString(Convert.ToInt32(textBox5.Text) + Convert.ToInt32(textBox6.Text));
+                    //textBox4.Text = Convert.ToString(Convert.ToInt32(textBox5.Text) + Convert.ToInt32(textBox6.Text));
                 }
                 cmd2.Dispose();
             }
