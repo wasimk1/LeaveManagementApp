@@ -162,7 +162,7 @@ namespace LeaveManagementApp
                         textBox3.Text = "0";
                     }
                     //decimal tatal=Math.
-                    textBox4.Text = ((18 - Convert.ToDouble(textBox2.Text)) + Convert.ToDouble(textBox3.Text)).ToString();
+                    textBox4.Text = ((Convert.ToDouble(textBox7.Text) - Convert.ToDouble(textBox2.Text)) + Convert.ToDouble(textBox3.Text)).ToString();
                 }
                 cmd2.Dispose();
             }
@@ -187,7 +187,7 @@ namespace LeaveManagementApp
                 {
                     textBox5.Text = dt.Rows[0]["TOT_CASUAL_LV"].ToString();
                     textBox6.Text = dt.Rows[0]["TOT_SICK_LV"].ToString();
-                    textBox7.Text = Convert.ToString(Convert.ToInt32(textBox5.Text) + Convert.ToInt32(textBox6.Text));
+                    textBox7.Text = Convert.ToString(Convert.ToDouble(textBox5.Text) + Convert.ToDouble(textBox6.Text));
                     //textBox4.Text = Convert.ToString(Convert.ToInt32(textBox5.Text) + Convert.ToInt32(textBox6.Text));
                 }
                 cmd2.Dispose();

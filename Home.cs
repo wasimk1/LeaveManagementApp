@@ -638,6 +638,19 @@ namespace LeaveManagementApp
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AdminReport openAdminReport = new AdminReport();
+            //this.Hide();
+            openAdminReport.ShowDialog();
+            //this.Close();
+        }
+
+        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
         private void cmBxshiftmode_Validating(object sender, CancelEventArgs e)
         {
             try
