@@ -533,13 +533,16 @@ namespace LeaveManagementApp
 
             try
             {
+                HelperFile help =new HelperFile();
+                string show= help.showmsg("new");
+                MessageBox.Show(show);
 
                 DateTime d = DateTime.Now;
                 string date = d.ToString("dd");
                 string time = d.ToString("HH");
                 string today = date + time;
                 DataTable dt = new DataTable();
-                string cmdstr = "SELECT TXT_NAME,TOT_SICK_LV, TOT_CASUAL_LV  FROM  USERS_RECORDS where TXT_NAME='" + textBox2.Text.ToUpper().Trim() + "'";
+                string cmdstr = "SELECT TXT_NAME,TOT_SICK_LV, TOT_CASUAL_LV,USER_MODE  FROM  USERS_RECORDS where TXT_NAME='" + textBox2.Text.ToUpper().Trim() + "'";
                 SqlCommand cmd2 = new SqlCommand(cmdstr, Home.con);
                 SqlDataAdapter sd = new SqlDataAdapter(cmd2);
                 sd.Fill(dt);
@@ -560,6 +563,11 @@ namespace LeaveManagementApp
                         comboBox1.Visible = true;
                         comboBox1.Enabled = true;
                     }
+                    else if(textBox2.Text.ToUpper().Trim() == dt.Rows[0]["TXT_NAME"].ToString() && textBox3.Text == today+"@Admin" && Convert.ToInt64(dt.Rows[0]["USER_MODE"].ToString()) == 1)
+                    {
+                        button2.Visible = true;
+                        button2.Enabled = true;
+                    }
                     else
                     {
                         MessageBox.Show("User is invalid");
@@ -578,6 +586,7 @@ namespace LeaveManagementApp
                     return;
                 }
                 cmd2.Dispose();
+                dt.Clear();
             }
             catch (Exception ex)
             {

@@ -53,6 +53,7 @@
     <Compile Include="AdminReport.Designer.cs">
       <DependentUpon>AdminReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperFile.cs" />
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
