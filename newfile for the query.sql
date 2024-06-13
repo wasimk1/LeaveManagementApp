@@ -1,0 +1,24 @@
+USE [LEAVE_MANAGEMENT_NEW]
+GO
+
+/****** Object:  Table [dbo].[USERS_RECORDS]    Script Date: 13/06/2024 5:04:18 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[USERS_RECORDS](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[TXT_NAME] [varchar](200) NULL,
+	[TOT_SICK_LV] [decimal](18, 1) NULL,
+	[TOT_CASUAL_LV] [decimal](18, 1) NULL,
+	[SYS_DATE_TIME] [datetime] NULL,
+	[ALL_BAL_LEAVE] [decimal](18, 1) NULL,
+	[USER_MODE] [int] NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[USERS_RECORDS] ADD  DEFAULT ((0)) FOR [USER_MODE]
+GO
+

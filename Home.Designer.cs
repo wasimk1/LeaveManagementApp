@@ -339,7 +339,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(109, 45);
+            this.textBox2.Location = new System.Drawing.Point(110, 45);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(150, 26);
             this.textBox2.TabIndex = 21;
@@ -366,7 +366,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(110, 103);
+            this.btnSubmit.Location = new System.Drawing.Point(109, 103);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(68, 28);
             this.btnSubmit.TabIndex = 24;
@@ -378,7 +378,7 @@
             // 
             this.btnLogout.Enabled = false;
             this.btnLogout.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Location = new System.Drawing.Point(192, 103);
+            this.btnLogout.Location = new System.Drawing.Point(193, 103);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(68, 28);
             this.btnLogout.TabIndex = 25;

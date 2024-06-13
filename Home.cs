@@ -533,10 +533,6 @@ namespace LeaveManagementApp
 
             try
             {
-                HelperFile help =new HelperFile();
-                string show= help.showmsg("new");
-                MessageBox.Show(show);
-
                 DateTime d = DateTime.Now;
                 string date = d.ToString("dd");
                 string time = d.ToString("HH");
