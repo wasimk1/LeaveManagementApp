@@ -38,7 +38,7 @@ namespace LeaveManagementApp
             {
                 if (Environment.MachineName == "PROBOOK") //For office DB connection string 
                 {
-                    strcon = ConfigurationManager.ConnectionStrings["constr-PROBOOK"].ConnectionString;
+                    strcon = ConfigurationManager.ConnectionStrings["constr-PROBOOK-NEW"].ConnectionString;
                 }
                 con = new SqlConnection(strcon);
                 con.Open();
