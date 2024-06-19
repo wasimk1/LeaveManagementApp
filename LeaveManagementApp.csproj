@@ -114,7 +114,6 @@
     <EmbeddedResource Include="ShowLeaveReport.resx">
       <DependentUpon>ShowLeaveReport.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="LeaveManagementApp_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
