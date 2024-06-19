@@ -191,10 +191,10 @@ namespace LeaveManagementApp
                 }
 
                 DataTable dt = new DataTable();
-                
+
                 // string cmd = "select sum(TOT_CASUAL_LV + TOT_SICK_LV)[TOTAL]  from USERS_RECORDS where TXT_NAME='"+username+"'"; 
-                string cmd = "select ALL_BAL_LEAVE from USERS_RECORDS where TXT_NAME='"+username+"'";
-                SqlCommand sql = new SqlCommand(cmd, con); 
+                string cmd = "select ALL_BAL_LEAVE from USERS_RECORDS where TXT_NAME='" + username + "'";
+                SqlCommand sql = new SqlCommand(cmd, con);
                 SqlDataAdapter sd = new SqlDataAdapter(sql);
                 sd.Fill(dt);
                 sd.Dispose();
@@ -217,7 +217,7 @@ namespace LeaveManagementApp
                         return;
                     }
                 }
-                
+
 
                 //MessageBox.Show(getLeaveType + " " + getShiftType + " "+startDate +" "+ endDate +" "+ txtnoofdays.Text + " "+ textBox1.Text);
                 InsertIntoDBLeaveRecord(getLeaveType, getShiftType, txtnoofdays.Text, textBox1.Text, startDate, endDate);
@@ -249,14 +249,14 @@ namespace LeaveManagementApp
                 else
                 {
                     cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID,EXTRA_WORK,TXT_NAME) VALUES ('" + lvtype + "','" + sftype + "'," + totdays + ",'" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "',0,'" + textBox2.Text.ToUpper().Trim() + "')";
-                    
-                    
+
+
                     double findtot = (tot - Convert.ToDouble(totdays));
-                     cmdstr1 = "UPDATE USERS_RECORDS SET ALL_BAL_LEAVE=" + findtot + " where TXT_NAME='" + username + "'";
+                    cmdstr1 = "UPDATE USERS_RECORDS SET ALL_BAL_LEAVE=" + findtot + " where TXT_NAME='" + username + "'";
                 }
                 //string cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID) VALUES ('" + lvtype + "','" + sftype + "','" + totdays + "','" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "')";
 
-                
+
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 cmd.ExecuteNonQuery();
 
@@ -559,7 +559,7 @@ namespace LeaveManagementApp
                         comboBox1.Visible = true;
                         comboBox1.Enabled = true;
                     }
-                    else if(textBox2.Text.ToUpper().Trim() == dt.Rows[0]["TXT_NAME"].ToString() && textBox3.Text == today+"@Admin" && Convert.ToInt64(dt.Rows[0]["USER_MODE"].ToString()) == 1)
+                    else if (textBox2.Text.ToUpper().Trim() == dt.Rows[0]["TXT_NAME"].ToString() && textBox3.Text == today + "@Admin" && Convert.ToInt64(dt.Rows[0]["USER_MODE"].ToString()) == 1)
                     {
                         button2.Visible = true;
                         button2.Enabled = true;

@@ -21,7 +21,7 @@ namespace LeaveManagementApp
         //string strcon = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         DataTable dtFillLeaveRpt = new DataTable();
         string getleaveid = "";
-        string filepath = @"C:\Leave_Management_Report\Leave_Management_Report_"+Home.username+".csv";
+        string filepath = @"C:\Leave_Management_Report\Leave_Management_Report_" + Home.username + ".csv";
 
         public ShowLeaveReport()
         {
@@ -156,7 +156,7 @@ namespace LeaveManagementApp
                 {
                     textBox2.Text = dt.Rows[0]["TotalTakenLeave"].ToString();
                     textBox3.Text = dt.Rows[0]["ExtraWork"].ToString();
-                    if(textBox2.Text=="" && textBox3.Text=="")
+                    if (textBox2.Text == "" && textBox3.Text == "")
                     {
                         textBox2.Text = "0";
                         textBox3.Text = "0";
