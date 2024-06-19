@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -548,6 +549,7 @@ namespace LeaveManagementApp
                 {
                     if (textBox2.Text.ToUpper().Trim() == dt.Rows[0]["TXT_NAME"].ToString() && textBox3.Text == today)
                     {
+                        LogDBforIn();
                         username = textBox2.Text.ToUpper().Trim();
                         label9.Visible = true;
                         comboBox1.Visible = true;
@@ -591,7 +593,44 @@ namespace LeaveManagementApp
 
         }
 
+        public void LogDBforIn()
+        {
+            string format = "yyyy-MM-dd HH:mm:ss tt";
+            DateTime time1 = DateTime.Now ;
+            DateTime time2 = DateTime.Now;
 
+            string logtime = time1.ToString(format);
+            //string logoutime= time2.ToString(format);
+            int empid = 1001;
+            string username = textBox2.Text.ToUpper().Trim();
+            string status = "ACTIVE";
+
+            string cmdstr = "INSERT INTO LOGINANDOUT (EMP_ID,TXT_USERNAME ,LOGIN_TIME,LOGOUT_TIME,EMP_STATUS) VALUES("+empid+",'"+ textBox2.Text.ToUpper().Trim() + "', '"+ logtime + "','"+ logtime + "','"+status+"')";
+
+            SqlCommand cmd = new SqlCommand(cmdstr,con);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+
+        }
+        public void LogDBforOut()
+        {
+            string format = "yyyy-MM-dd hh:mm:ss tt";
+            DateTime time1 = DateTime.Now;
+            DateTime time2 = DateTime.Now;
+
+            string logouttime = time1.ToString(format);
+            //string logoutime= time2.ToString(format);
+            int empid = 1001;
+            string username = textBox2.Text.ToUpper().Trim();
+            string status = "INACTIVE";
+
+            string cmdstr = "update LOGINANDOUT set LOGOUT_TIME='"+ logouttime + "', EMP_STATUS='"+status+"' where EMP_ID='"+ empid + "' and EMP_STATUS='ACTIVE'";
+
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+
+        }
         public void HideonLogout()
         {
             try
@@ -636,6 +675,7 @@ namespace LeaveManagementApp
             textBox2.ReadOnly = false;
             textBox3.ReadOnly = false;
             HideonLogout();
+            LogDBforOut();
         }
 
         private void txtnoofdays_TextChanged(object sender, EventArgs e)
