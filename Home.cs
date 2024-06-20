@@ -301,10 +301,12 @@ namespace LeaveManagementApp
         }
         private void Home_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Do you want to close the Application?", "ExitApplicationApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBox.Show("Do you want to close the Application?", "Exit Application", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 e.Cancel = true;
+                
             }
+            LogDBforOut();
             //else
             //{
             //    e.Cancel = false;
