@@ -403,7 +403,7 @@ namespace LeaveManagementApp
         private void comboBox1_Validating(object sender, CancelEventArgs e)
         {
             string appstart = comboBox1.SelectedText.ToString().Trim();
-            if (appstart == "Apply Leave")
+            if (appstart == "Apply Leave or Extra Working")
             {
                 ShowFiledApplyLeave();
             }
@@ -692,6 +692,11 @@ namespace LeaveManagementApp
         }
 
         private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
