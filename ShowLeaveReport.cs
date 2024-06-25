@@ -127,7 +127,7 @@ namespace LeaveManagementApp
                 }
                 else
                 {
-                    MessageBox.Show("There is no data present to show");
+                    MessageBox.Show("You have not taken any Leave yet");
                     return;
                 }
                 button2.Text = "Referesh";
