@@ -63,7 +63,7 @@
             // btnapplyleave
             // 
             this.btnapplyleave.Enabled = false;
-            this.btnapplyleave.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnapplyleave.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnapplyleave.Location = new System.Drawing.Point(109, 276);
             this.btnapplyleave.Margin = new System.Windows.Forms.Padding(2);
             this.btnapplyleave.Name = "btnapplyleave";
@@ -270,7 +270,9 @@
             this.comboBox1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Apply Leave or Extra Working",
+            "Apply Leave",
+            "Apply Extra Working",
+            "Work From Home",
             "Delete Applied Leave"});
             this.comboBox1.Location = new System.Drawing.Point(110, 146);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);

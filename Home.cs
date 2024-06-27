@@ -360,6 +360,11 @@ namespace LeaveManagementApp
                 btndel.Visible = false;
                 txtgetlvidfordel.Visible = false;
                 comboBox1.Enabled = false; // For disabling the combo box after selecting the item 
+                if (comboBox1.SelectedItem.ToString() == "Apply Extra Working")
+                {
+                    btnapplyleave.Text = "Apply Extra Working";
+                    
+                }
             }
             catch (Exception)
             {
@@ -405,7 +410,11 @@ namespace LeaveManagementApp
         private void comboBox1_Validating(object sender, CancelEventArgs e)
         {
             string appstart = comboBox1.SelectedText.ToString().Trim();
-            if (appstart == "Apply Leave or Extra Working")
+            if (appstart == "Apply Leave")
+            {
+                ShowFiledApplyLeave();
+            }
+            else if(appstart == "Apply Extra Working")
             {
                 ShowFiledApplyLeave();
             }
