@@ -64,10 +64,10 @@
             // 
             this.btnapplyleave.Enabled = false;
             this.btnapplyleave.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnapplyleave.Location = new System.Drawing.Point(109, 276);
-            this.btnapplyleave.Margin = new System.Windows.Forms.Padding(2);
+            this.btnapplyleave.Location = new System.Drawing.Point(145, 340);
+            this.btnapplyleave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnapplyleave.Name = "btnapplyleave";
-            this.btnapplyleave.Size = new System.Drawing.Size(107, 39);
+            this.btnapplyleave.Size = new System.Drawing.Size(143, 48);
             this.btnapplyleave.TabIndex = 8;
             this.btnapplyleave.Text = "Apply Leave";
             this.btnapplyleave.UseVisualStyleBackColor = true;
@@ -77,10 +77,10 @@
             // combxleavetype
             // 
             this.combxleavetype.FormattingEnabled = true;
-            this.combxleavetype.Location = new System.Drawing.Point(110, 170);
-            this.combxleavetype.Margin = new System.Windows.Forms.Padding(2);
+            this.combxleavetype.Location = new System.Drawing.Point(147, 209);
+            this.combxleavetype.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.combxleavetype.Name = "combxleavetype";
-            this.combxleavetype.Size = new System.Drawing.Size(198, 21);
+            this.combxleavetype.Size = new System.Drawing.Size(263, 24);
             this.combxleavetype.TabIndex = 1;
             this.combxleavetype.Visible = false;
             this.combxleavetype.SelectedIndexChanged += new System.EventHandler(this.combxleavetype_SelectedIndexChanged);
@@ -89,10 +89,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 173);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(16, 213);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 16);
+            this.label1.Size = new System.Drawing.Size(94, 21);
             this.label1.TabIndex = 2;
             this.label1.Text = "Leave Type";
             this.label1.Visible = false;
@@ -100,10 +99,10 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(109, 195);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimePicker1.Location = new System.Drawing.Point(145, 240);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker1.TabIndex = 2;
             this.dateTimePicker1.Visible = false;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged_1);
@@ -113,10 +112,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 198);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(16, 244);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 16);
+            this.label2.Size = new System.Drawing.Size(88, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "Start Date";
             this.label2.Visible = false;
@@ -125,10 +123,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(386, 200);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(515, 246);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 16);
+            this.label3.Size = new System.Drawing.Size(78, 21);
             this.label3.TabIndex = 5;
             this.label3.Text = "End Date";
             this.label3.Visible = false;
@@ -136,21 +133,21 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(450, 199);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimePicker2.Location = new System.Drawing.Point(600, 245);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker2.TabIndex = 3;
             this.dateTimePicker2.Visible = false;
             this.dateTimePicker2.Validating += new System.ComponentModel.CancelEventHandler(this.dateTimePicker2_Validating);
             // 
             // txtnoofdays
             // 
-            this.txtnoofdays.Location = new System.Drawing.Point(563, 223);
-            this.txtnoofdays.Margin = new System.Windows.Forms.Padding(2);
+            this.txtnoofdays.Location = new System.Drawing.Point(751, 274);
+            this.txtnoofdays.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnoofdays.Name = "txtnoofdays";
             this.txtnoofdays.ReadOnly = true;
-            this.txtnoofdays.Size = new System.Drawing.Size(38, 20);
+            this.txtnoofdays.Size = new System.Drawing.Size(49, 22);
             this.txtnoofdays.TabIndex = 4;
             this.txtnoofdays.Visible = false;
             this.txtnoofdays.TextChanged += new System.EventHandler(this.txtnoofdays_TextChanged);
@@ -158,11 +155,11 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(109, 252);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Location = new System.Drawing.Point(145, 310);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.MaxLength = 500;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(492, 22);
+            this.textBox1.Size = new System.Drawing.Size(655, 26);
             this.textBox1.TabIndex = 7;
             this.textBox1.Visible = false;
             this.textBox1.WordWrap = false;
@@ -172,9 +169,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(4, 255);
+            this.label5.Location = new System.Drawing.Point(5, 314);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 16);
+            this.label5.Size = new System.Drawing.Size(135, 21);
             this.label5.TabIndex = 10;
             this.label5.Text = "Leave Comment";
             this.label5.Visible = false;
@@ -183,9 +181,10 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Enabled = false;
-            this.checkBox1.Location = new System.Drawing.Point(109, 229);
+            this.checkBox1.Location = new System.Drawing.Point(145, 282);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.Size = new System.Drawing.Size(18, 17);
             this.checkBox1.TabIndex = 5;
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.Visible = false;
@@ -195,9 +194,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(11, 227);
+            this.label4.Location = new System.Drawing.Point(15, 279);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 16);
+            this.label4.Size = new System.Drawing.Size(77, 21);
             this.label4.TabIndex = 12;
             this.label4.Text = "Day Shift";
             this.label4.Visible = false;
@@ -205,9 +205,10 @@
             // cmBxshiftmode
             // 
             this.cmBxshiftmode.FormattingEnabled = true;
-            this.cmBxshiftmode.Location = new System.Drawing.Point(130, 226);
+            this.cmBxshiftmode.Location = new System.Drawing.Point(173, 278);
+            this.cmBxshiftmode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmBxshiftmode.Name = "cmBxshiftmode";
-            this.cmBxshiftmode.Size = new System.Drawing.Size(131, 21);
+            this.cmBxshiftmode.Size = new System.Drawing.Size(173, 24);
             this.cmBxshiftmode.TabIndex = 6;
             this.cmBxshiftmode.Visible = false;
             this.cmBxshiftmode.Validating += new System.ComponentModel.CancelEventHandler(this.cmBxshiftmode_Validating);
@@ -216,9 +217,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(386, 226);
+            this.label6.Location = new System.Drawing.Point(515, 278);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 16);
+            this.label6.Size = new System.Drawing.Size(77, 21);
             this.label6.TabIndex = 13;
             this.label6.Text = "Total day";
             this.label6.Visible = false;
@@ -227,18 +229,20 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(124, -4);
+            this.label7.Location = new System.Drawing.Point(165, -5);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(301, 33);
+            this.label7.Size = new System.Drawing.Size(378, 41);
             this.label7.TabIndex = 12;
             this.label7.Text = "Leave Management App";
             // 
             // txtlvid
             // 
-            this.txtlvid.Location = new System.Drawing.Point(109, 320);
+            this.txtlvid.Location = new System.Drawing.Point(145, 394);
+            this.txtlvid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtlvid.Name = "txtlvid";
             this.txtlvid.ReadOnly = true;
-            this.txtlvid.Size = new System.Drawing.Size(100, 20);
+            this.txtlvid.Size = new System.Drawing.Size(132, 22);
             this.txtlvid.TabIndex = 9;
             this.txtlvid.Visible = false;
             // 
@@ -246,9 +250,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(14, 324);
+            this.label8.Location = new System.Drawing.Point(19, 399);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(58, 16);
+            this.label8.Size = new System.Drawing.Size(77, 21);
             this.label8.TabIndex = 8;
             this.label8.Text = "Leave ID";
             this.label8.Visible = false;
@@ -256,9 +261,10 @@
             // btnlvreport
             // 
             this.btnlvreport.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnlvreport.Location = new System.Drawing.Point(463, 146);
+            this.btnlvreport.Location = new System.Drawing.Point(617, 180);
+            this.btnlvreport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnlvreport.Name = "btnlvreport";
-            this.btnlvreport.Size = new System.Drawing.Size(137, 24);
+            this.btnlvreport.Size = new System.Drawing.Size(183, 30);
             this.btnlvreport.TabIndex = 10;
             this.btnlvreport.Text = "Show Leave Report";
             this.btnlvreport.UseVisualStyleBackColor = true;
@@ -274,10 +280,10 @@
             "Apply Extra Working",
             "Work From Home",
             "Delete Applied Leave"});
-            this.comboBox1.Location = new System.Drawing.Point(110, 146);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox1.Location = new System.Drawing.Point(147, 180);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(198, 24);
+            this.comboBox1.Size = new System.Drawing.Size(263, 27);
             this.comboBox1.TabIndex = 0;
             this.comboBox1.Visible = false;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -287,10 +293,9 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(15, 149);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Location = new System.Drawing.Point(20, 183);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 16);
+            this.label9.Size = new System.Drawing.Size(48, 21);
             this.label9.TabIndex = 17;
             this.label9.Text = "Start";
             this.label9.Visible = false;
@@ -298,10 +303,10 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(312, 144);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(416, 177);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 24);
+            this.button1.Size = new System.Drawing.Size(99, 30);
             this.button1.TabIndex = 11;
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
@@ -310,20 +315,20 @@
             // 
             // txtgetlvidfordel
             // 
-            this.txtgetlvidfordel.Location = new System.Drawing.Point(110, 170);
-            this.txtgetlvidfordel.Margin = new System.Windows.Forms.Padding(2);
+            this.txtgetlvidfordel.Location = new System.Drawing.Point(147, 209);
+            this.txtgetlvidfordel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtgetlvidfordel.Name = "txtgetlvidfordel";
-            this.txtgetlvidfordel.Size = new System.Drawing.Size(198, 20);
+            this.txtgetlvidfordel.Size = new System.Drawing.Size(263, 22);
             this.txtgetlvidfordel.TabIndex = 18;
             this.txtgetlvidfordel.Visible = false;
             // 
             // btndel
             // 
             this.btndel.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndel.Location = new System.Drawing.Point(312, 169);
-            this.btndel.Margin = new System.Windows.Forms.Padding(2);
+            this.btndel.Location = new System.Drawing.Point(416, 208);
+            this.btndel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btndel.Name = "btndel";
-            this.btndel.Size = new System.Drawing.Size(74, 24);
+            this.btndel.Size = new System.Drawing.Size(99, 30);
             this.btndel.TabIndex = 19;
             this.btndel.Text = "Delete";
             this.btndel.UseVisualStyleBackColor = true;
@@ -334,45 +339,50 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(18, 51);
+            this.label10.Location = new System.Drawing.Point(24, 63);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(68, 16);
+            this.label10.Size = new System.Drawing.Size(88, 21);
             this.label10.TabIndex = 20;
             this.label10.Text = "Username";
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(110, 45);
+            this.textBox2.Location = new System.Drawing.Point(147, 55);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 26);
+            this.textBox2.Size = new System.Drawing.Size(199, 30);
             this.textBox2.TabIndex = 21;
             // 
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(110, 75);
+            this.textBox3.Location = new System.Drawing.Point(147, 92);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox3.Name = "textBox3";
             this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(150, 26);
+            this.textBox3.Size = new System.Drawing.Size(199, 30);
             this.textBox3.TabIndex = 23;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(18, 80);
+            this.label11.Location = new System.Drawing.Point(24, 98);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 16);
+            this.label11.Size = new System.Drawing.Size(86, 21);
             this.label11.TabIndex = 22;
             this.label11.Text = "Password";
             // 
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(109, 103);
+            this.btnSubmit.Location = new System.Drawing.Point(145, 127);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(68, 28);
+            this.btnSubmit.Size = new System.Drawing.Size(91, 34);
             this.btnSubmit.TabIndex = 24;
             this.btnSubmit.Text = "Login";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -382,9 +392,10 @@
             // 
             this.btnLogout.Enabled = false;
             this.btnLogout.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Location = new System.Drawing.Point(193, 103);
+            this.btnLogout.Location = new System.Drawing.Point(257, 127);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(68, 28);
+            this.btnLogout.Size = new System.Drawing.Size(91, 34);
             this.btnLogout.TabIndex = 25;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
@@ -392,9 +403,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(368, 75);
+            this.button2.Location = new System.Drawing.Point(491, 92);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 23);
+            this.button2.Size = new System.Drawing.Size(129, 28);
             this.button2.TabIndex = 26;
             this.button2.Text = "Show Summary";
             this.button2.UseVisualStyleBackColor = true;
@@ -403,10 +415,10 @@
             // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(606, 357);
+            this.ClientSize = new System.Drawing.Size(808, 439);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnSubmit);
@@ -439,7 +451,7 @@
             this.Controls.Add(this.btnapplyleave);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Leave Management";

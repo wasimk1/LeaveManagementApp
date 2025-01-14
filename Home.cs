@@ -19,6 +19,7 @@ namespace LeaveManagementApp
 {
     public partial class Home : Form
     {
+        //Deceleration of variable
         public static SqlConnection con = null;
         DataTable dtleavetype = new DataTable();
         DataTable dtshiftmode = new DataTable();
@@ -27,7 +28,9 @@ namespace LeaveManagementApp
         public static int leaveid;
         public static string username = string.Empty;
         public static string strcon = ConfigurationManager.ConnectionStrings["constr-PAVILION-NB"].ConnectionString;
-        Double tot = 0;
+        Double totCasualLV = 0;
+        Double totSickLV = 0;
+        DataTable dt_UsersLVData = new DataTable();
         public Home()
         {
             InitializeComponent();
@@ -191,31 +194,34 @@ namespace LeaveManagementApp
                     getShiftType = "FULL DAY"; //+ txtnoofdays.Text + " Day taken holiday";
                 }
 
-                DataTable dt = new DataTable();
+
 
                 // string cmd = "select sum(TOT_CASUAL_LV + TOT_SICK_LV)[TOTAL]  from USERS_RECORDS where TXT_NAME='"+username+"'"; 
-                string cmd = "select ALL_BAL_LEAVE from USERS_RECORDS where TXT_NAME='" + username + "'";
+                string cmd = "select TOT_CASUAL_LV, TOT_SICK_LV from USERS_RECORDS where TXT_NAME='" + username + "'";
                 SqlCommand sql = new SqlCommand(cmd, con);
                 SqlDataAdapter sd = new SqlDataAdapter(sql);
-                sd.Fill(dt);
+                sd.Fill(dt_UsersLVData);
                 sd.Dispose();
-                if (dt.Rows.Count > 0)
+                if (dt_UsersLVData.Rows.Count > 0)
                 {
-                    //if(dt.Rows[0]["TotalTakenLeave"].ToString()=="" && dt.Rows[0]["TotalTakenLeave"].ToString() == "")
-                    //{
-                    //     tot = Convert.ToDouble("0");
-                    //}
-                    //else
-                    //{
-                    //    string t = dt.Rows[0]["TotalTakenLeave"].ToString();
-                    //    string t1 = dt.Rows[0]["ExtraWork"].ToString();
-                    //     tot = Convert.ToDouble(t1) * Convert.ToDouble(t);
-                    //}
-                    tot = Convert.ToDouble(dt.Rows[0]["ALL_BAL_LEAVE"].ToString());
-                    if (Convert.ToDouble(txtnoofdays.Text) > tot)
+                    if (combxleavetype.SelectedValue.ToString() == "CASUAL LEAVE")
                     {
-                        MessageBox.Show("You are trying to apply a Leave grater than your ramaining Leave, Not possible! You only have " + tot + " Leave remaining");
-                        return;
+                        totCasualLV = Convert.ToDouble(dt_UsersLVData.Rows[0]["TOT_CASUAL_LV"].ToString());
+                        if (Convert.ToDouble(txtnoofdays.Text) > totCasualLV)
+                        {
+                            MessageBox.Show("You are trying to apply a Casual Leave grater than your ramaining Leave, Not possible! You only have " + totCasualLV + " Casual Leave remaining");
+                            return;
+                        }
+                    }
+
+                    if (combxleavetype.SelectedValue.ToString() == "SICK LEAVE")
+                    {
+                        totSickLV = Convert.ToDouble(dt_UsersLVData.Rows[0]["TOT_SICK_LV"].ToString());
+                        if (Convert.ToDouble(txtnoofdays.Text) > totSickLV)
+                        {
+                            MessageBox.Show("You are trying to apply a Sick Leave grater than your ramaining Leave, Not possible! You only have " + totSickLV + " Sick Leave remaining");
+                            return;
+                        }
                     }
                 }
 
@@ -237,23 +243,18 @@ namespace LeaveManagementApp
                 //con.Open();
                 CreateLeaveID();
                 string cmdstr = string.Empty;
-                string cmdstr1 = string.Empty;
                 string modleaveid = "LEV" + leaveid;
                 DateTime dateTime = DateTime.Now;
                 if (combxleavetype.SelectedValue.ToString() == "EXTRA WORKING")
                 {
                     cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID,EXTRA_WORK,TXT_NAME) VALUES ('" + lvtype + "','" + sftype + "',0,'" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "'," + totdays + ",'" + textBox2.Text.ToUpper().Trim() + "')";
-                    double findtot = (tot + Convert.ToDouble(totdays));
-                    cmdstr1 = "UPDATE USERS_RECORDS SET ALL_BAL_LEAVE=" + findtot + " where TXT_NAME='" + username + "'";
-
+                    //double findtot = (totCasualLV + Convert.ToDouble(totdays));
+                    //cmdstr1 = "UPDATE USERS_RECORDS SET ALL_BAL_LEAVE=" + findtot + " where TXT_NAME='" + username + "'";
                 }
                 else
                 {
                     cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID,EXTRA_WORK,TXT_NAME) VALUES ('" + lvtype + "','" + sftype + "'," + totdays + ",'" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "',0,'" + textBox2.Text.ToUpper().Trim() + "')";
-
-
-                    double findtot = (tot - Convert.ToDouble(totdays));
-                    cmdstr1 = "UPDATE USERS_RECORDS SET ALL_BAL_LEAVE=" + findtot + " where TXT_NAME='" + username + "'";
+                    updateLeaveBal(lvtype);
                 }
                 //string cmdstr = "INSERT INTO LEAVE_RECORDS (TXT_LEAVE_TYPE,TXT_SHIFT_TYPE,HOLIDAY_OR_WORKING_HRS,LEAVE_COMMENT,STARTDATE,ENDDATE,SYS_DATE,LEAVEID) VALUES ('" + lvtype + "','" + sftype + "','" + totdays + "','" + lvcom + "','" + stdt + "','" + endt + "','" + dateTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + modleaveid + "')";
 
@@ -261,16 +262,13 @@ namespace LeaveManagementApp
                 SqlCommand cmd = new SqlCommand(cmdstr, con);
                 cmd.ExecuteNonQuery();
 
-                SqlCommand cmd1 = new SqlCommand(cmdstr1, con);
-                cmd1.ExecuteNonQuery();
-                //con.Close();
-                btnapplyleave.Enabled = false;
+                //SqlCommand cmd1 = new SqlCommand(cmdstr1, con);
+                //cmd1.ExecuteNonQuery();
 
+                btnapplyleave.Enabled = false;
                 MessageBox.Show("Leave Applied successfully, LeaveID=" + modleaveid);
                 txtlvid.Text = modleaveid;
-                //con.Close();
                 cmd.Dispose();
-                cmd1.Dispose();
             }
             catch (Exception ex)
             {
@@ -278,6 +276,91 @@ namespace LeaveManagementApp
                 return;
             }
         }
+        //Added on 14-01-2025 for updating the leave balance records in DB
+        public void updateLeaveBal(string leavetype)
+        {
+            try
+            {
+                string cmdstr1 = string.Empty;
+                double findTotCasualLV;
+                double findTotSickLV;
+                double findTotAvlBal;
+                
+                DataTable dt_LVupdate = new DataTable();
+
+                string cmd = "select TOT_CASUAL_LV, TOT_SICK_LV,ALL_BAL_LEAVE from USERS_RECORDS where TXT_NAME='" + username + "'";
+                SqlCommand sql = new SqlCommand(cmd, con);
+                SqlDataAdapter sd = new SqlDataAdapter(sql);
+                sd.Fill(dt_LVupdate);
+                sd.Dispose();
+
+                if (dt_LVupdate.Rows.Count > 0)
+                {
+                    if (leavetype == "CASUAL LEAVE")
+                    {
+                        double totCasLV = Convert.ToDouble(dt_LVupdate.Rows[0]["TOT_CASUAL_LV"].ToString());
+                        findTotCasualLV = totCasLV - Convert.ToDouble(txtnoofdays.Text);
+                        
+                        cmdstr1 = "UPDATE USERS_RECORDS SET TOT_CASUAL_LV=" + findTotCasualLV + " where TXT_NAME='" + username + "'";
+                        SqlCommand cmd1 = new SqlCommand(cmdstr1, con);
+                        cmd1.ExecuteNonQuery();
+                    }
+                }
+
+                if (leavetype == "SICK LEAVE")
+                {
+                    double totSickLV = Convert.ToDouble(dt_LVupdate.Rows[0]["TOT_SICK_LV"].ToString());
+                    findTotSickLV = totSickLV - Convert.ToDouble(txtnoofdays.Text);
+
+                    cmdstr1 = "UPDATE USERS_RECORDS SET TOT_SICK_LV=" + findTotSickLV + " where TXT_NAME='" + username + "'";
+                    SqlCommand cmd1 = new SqlCommand(cmdstr1, con);
+                    cmd1.ExecuteNonQuery();
+                }
+                dt_LVupdate.Clear();
+                //dt_UsersLVData.Clear();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+
+        }
+        //public void updateOverallTotBalanceLV()
+        //{
+        //    try
+        //    {
+        //        DataTable dt_updateOverallbal = new DataTable();
+        //        cmdstr1 = string.Empty;
+        //        cmdstr1 = "SELECT SUM(HOLIDAY_OR_WORKING_HRS) [LEAVE COUNT]FROM LEAVE_RECORDS WHERE TXT_NAME='" + username + "'";
+        //        SqlCommand sql1 = new SqlCommand(cmdstr1, con);
+        //        SqlDataAdapter sd1 = new SqlDataAdapter(sql1);
+        //        sd1.Fill(dt_updateOverallbal);
+        //        sd1.Dispose();
+
+        //        if (dt_updateOverallbal.Rows.Count <= 0)
+        //        {
+        //            findTotAvlBal = Convert.ToDouble(dt_LVupdate.Rows[0]["ALL_BAL_LEAVE"].ToString()) - Convert.ToDouble(txtnoofdays.Text);
+        //        }
+        //        else
+        //        {
+        //            findTotAvlBal = Convert.ToDouble(dt_LVupdate.Rows[0]["ALL_BAL_LEAVE"].ToString()) - Convert.ToDouble(dt_updateOverallbal.Rows[0]["LEAVE COUNT"].ToString());
+        //        }
+
+        //        cmdstr1 = "UPDATE USERS_RECORDS SET ALL_BAL_LEAVE=" + findTotAvlBal + " where TXT_NAME='" + username + "'";
+        //        SqlCommand cmdnew = new SqlCommand(cmdstr1, con);
+        //        cmdnew.ExecuteNonQuery();
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //}
         private void CreateLeaveID()
         {
             try
@@ -304,7 +387,7 @@ namespace LeaveManagementApp
             if (MessageBox.Show("Do you want to close the Application?", "Exit Application", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 e.Cancel = true;
-                
+
             }
             LogDBforOut();
             //else
@@ -363,7 +446,7 @@ namespace LeaveManagementApp
                 if (comboBox1.SelectedItem.ToString() == "Apply Extra Working")
                 {
                     btnapplyleave.Text = "Apply Extra Working";
-                    
+
                 }
             }
             catch (Exception)
@@ -414,7 +497,7 @@ namespace LeaveManagementApp
             {
                 ShowFiledApplyLeave();
             }
-            else if(appstart == "Apply Extra Working")
+            else if (appstart == "Apply Extra Working")
             {
                 ShowFiledApplyLeave();
             }
@@ -508,6 +591,7 @@ namespace LeaveManagementApp
                 txtgetlvidfordel.Visible = false;
                 btndel.Visible = false;
                 comboBox1.Enabled = true; // Modified for cancelling the Leave applying process
+                dt_UsersLVData.Clear();
             }
             catch (Exception ex)
             {
@@ -560,7 +644,7 @@ namespace LeaveManagementApp
                 {
                     if (textBox2.Text.ToUpper().Trim() == dt.Rows[0]["TXT_NAME"].ToString() && textBox3.Text == today)
                     {
-                        LogDBforIn();
+                        //LogDBforIn();
                         username = textBox2.Text.ToUpper().Trim();
                         label9.Visible = true;
                         comboBox1.Visible = true;
@@ -607,7 +691,7 @@ namespace LeaveManagementApp
         public void LogDBforIn()
         {
             string format = "yyyy-MM-dd HH:mm:ss tt";
-            DateTime time1 = DateTime.Now ;
+            DateTime time1 = DateTime.Now;
             DateTime time2 = DateTime.Now;
 
             string logtime = time1.ToString(format);
@@ -616,9 +700,9 @@ namespace LeaveManagementApp
             string username = textBox2.Text.ToUpper().Trim();
             string status = "ACTIVE";
 
-            string cmdstr = "INSERT INTO LOGINANDOUT (EMP_ID,TXT_USERNAME ,LOGIN_TIME,LOGOUT_TIME,EMP_STATUS) VALUES("+empid+",'"+ textBox2.Text.ToUpper().Trim() + "', '"+ logtime + "','"+ logtime + "','"+status+"')";
+            string cmdstr = "INSERT INTO LOGINANDOUT (EMP_ID,TXT_USERNAME ,LOGIN_TIME,LOGOUT_TIME,EMP_STATUS) VALUES(" + empid + ",'" + textBox2.Text.ToUpper().Trim() + "', '" + logtime + "','" + logtime + "','" + status + "')";
 
-            SqlCommand cmd = new SqlCommand(cmdstr,con);
+            SqlCommand cmd = new SqlCommand(cmdstr, con);
             cmd.ExecuteNonQuery();
             cmd.Dispose();
 
@@ -635,7 +719,7 @@ namespace LeaveManagementApp
             string username = textBox2.Text.ToUpper().Trim();
             string status = "INACTIVE";
 
-            string cmdstr = "update LOGINANDOUT set LOGOUT_TIME='"+ logouttime + "', EMP_STATUS='"+status+"' where EMP_ID='"+ empid + "' and EMP_STATUS='ACTIVE'";
+            string cmdstr = "update LOGINANDOUT set LOGOUT_TIME='" + logouttime + "', EMP_STATUS='" + status + "' where EMP_ID='" + empid + "' and EMP_STATUS='ACTIVE'";
 
             SqlCommand cmd = new SqlCommand(cmdstr, con);
             cmd.ExecuteNonQuery();
